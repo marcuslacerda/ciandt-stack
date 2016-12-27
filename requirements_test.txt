@@ -1,0 +1,5 @@
+requests
+httplib2
+elasticsearch
+python-dotenv
+mock==2.0.0

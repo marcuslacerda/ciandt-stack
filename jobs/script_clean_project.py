@@ -1,7 +1,7 @@
+"""Script clean project."""
 import logging
-import os
-import sys
-from client import TechAnalytics
+from config import Config
+from knowledge import Knowledge, Project
 
 FORMAT = '%(name)s %(levelname)-5s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -10,7 +10,13 @@ logger.addHandler(logging.NullHandler())
 logger.setLevel(logging.DEBUG)
 logging.getLogger('elasticsearch').setLevel(logging.ERROR)
 
-ta = TechAnalytics()
-sheet_id = '1eQ2KJqddexCgVmiQRYEy1WtxcAA5cDpAA8ecveDsoNQ'
+config = Config()
+knowledge = Knowledge(config)
+project = Project(config)
 
-ta.delete_sheet(sheet_id=sheet_id)
+sheet_id = '1NZeRcbswSQbKHgDw8cT0CuWe7-0q8M5YrWlkTbXYnwo'
+
+q = "sheet_id:"+sheet_id
+project.delete_by_query('project', q)
+knowledge.delete_by_query('knowledge', q)
+# stack.delete_by_query('stack', 'key:'+sheet_id)

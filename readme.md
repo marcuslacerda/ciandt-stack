@@ -15,7 +15,7 @@ $ git clone https://github.com/marcuslacerda/stack-gallery.git
 $ cd stack-gallery
 ```
 
-You must define these environments on your variable. 
+You must define these environments on your variable.
 
 ```console
 $ export GOOGLE_CLIENT_ID=set-google-client-id-here_or_export-env-vavariable>
@@ -43,13 +43,31 @@ Run the Docker container using the command shown below.
 $ docker run -e ELASTICSEARCH_URL=http://localhost:9200 -e GOOGLE_CLIENT_SECRET=<put-your-client-secret> -e GOOGLE_CLIENT_ID=<put-your-client-id> -p 5000:5000 stack-app
 ```
 
-If you need a full local enviroment, you must start [Elasticsearch] and change elasticsearch host at ELASTICSEARCH_URL variable. 
+If you need a full local enviroment, you must start [Elasticsearch] and change elasticsearch host at ELASTICSEARCH_URL variable.
 
 You must configure these GOOGLE values from [Google APIs console]
 
 ```console
 $ run docker -p 9200:9200 elasticsearch
 ```
+
+To execute tests, install all dependencies from requirements_test.txt into lib_tests path:
+```
+pip install -r requirements_test.txt -t lib_tests
+```
+
+To run the tests
+```
+nosetests -v tests
+```
+#### Coverage:
+
+To measure tests coverage in Python code. This recipe runs nosetests suite and presents coverage at the end:
+```
+nosetests -v --with-cover --cover-html --cover-package=. tests/
+```
+A detailed report from coverage can be found at cover folder in project's path.
+
 
 The application will be accessible at http://localhost:5000
 
@@ -60,4 +78,4 @@ The application will be accessible at http://localhost:5000
 [Git]: http://help.github.com/set-up-git-redirect
 [Python]: https://www.python.org
 [Pull requests]: https://help.github.com/categories/collaborating-on-projects-using-issues-and-pull-requests/
-[Elasticsearch]: https://www.elastic.co/products/elasticsearch 
+[Elasticsearch]: https://www.elastic.co/products/elasticsearch

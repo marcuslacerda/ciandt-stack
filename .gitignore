@@ -13,3 +13,6 @@ venv
 #  dotenv
 .env
 
+
+# unittest
+libs_tests

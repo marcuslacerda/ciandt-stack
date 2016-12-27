@@ -1,11 +1,8 @@
-from preggy import expect
+from config import Config
+import unittest
 
-from tests.base import TestCase
-from techanalytics import config
-
-class ConfigTestCase(TestCase):
-    def test_has_people_config(self):
-    	c = config.load()	
-    	people_host = c['people']['people']['host']
-    	expect(people_host).to_equal('https://people.cit.com.br')
-    		
+class ConfigTestCase(unittest.TestCase):
+    def test_has_gateway_config(self):
+    	c = Config()
+        value = c.get('TECHGALLERY_ENDPOINT')
+        self.assertEquals(value, 'https://tech-gallery.appspot.com/_ah/api/rest/v1')

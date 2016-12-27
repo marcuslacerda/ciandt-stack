@@ -4,7 +4,6 @@ from flask import jsonify
 from flask import request
 import requests
 import json
-import logging
 from datetime import datetime
 
 

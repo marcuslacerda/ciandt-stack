@@ -1,10 +1,18 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+"""Package for tests."""
+import os
+import sys
+import logging
 
-# This file is part of sandbox.
-# https://github.com/marcuslacerda/tech-gallery-analytics
+sys.path.insert(1, os.path.abspath(os.curdir))
+sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'lib_tests'))
+sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'jobs'))
+# sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'server', 'app'))
 
-# Licensed under the MIT license:
-# http://www.opensource.org/licenses/MIT-license
-# Copyright (c) 2016, Marcus Lacerda <marcus.lacerda@gmail.com>
+FORMAT = '%(name)s %(levelname)-5s %(message)s'
+logging.basicConfig(format=FORMAT)
+logger = logging.getLogger('stack')
+logger.addHandler(logging.NullHandler())
+logger.setLevel(logging.DEBUG)
+logging.getLogger('elasticsearch').setLevel(logging.ERROR)
 
+# print sys.path

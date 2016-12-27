@@ -41,7 +41,7 @@ class Stack(object):
                     doc_stack = doc_result['_source']
                     project['last_activity'] = doc_stack.get('last_activity')
                     project['last_activity_user'] = doc_stack.get('last_activity_user')
-                    logger.info('merge was done')
+                    logger.debug('merge was done')
             except Exception, e:
                 logger.info('stack %s not exits' % key)
 

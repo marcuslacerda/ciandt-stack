@@ -22,8 +22,20 @@ from utils import logger_builder
 try:
     import argparse
     parser = argparse.ArgumentParser(parents=[tools.argparser])
-    parser.add_argument('--sheet_id', help='Define the sheet_id', required=False)
-    parser.add_argument('--notify', action='store_true', default=False, help='If notify is defined, then errors will be sent by email', required=False)
+    parser.add_argument(
+        '--logging_level', default='ERROR',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+        help='Set the logging level of detail.')
+    parser.add_argument(
+        '--sheet_id',
+        help='Define the sheet_id',
+        required=False)
+    parser.add_argument(
+        '--notify',
+        action='store_true',
+        default=False,
+        help='If notify is defined, then errors will be sent by email',
+        required=False)
     flags = parser.parse_args()
     args = vars(flags)
 except ImportError:

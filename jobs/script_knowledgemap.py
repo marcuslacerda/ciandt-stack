@@ -11,22 +11,13 @@ python script_knowledgemap.py --notify
 # load just sheet_id
 python script_knowledgemap.py --sheet_id 1tsmRA0TOCEpr5aAQA8-B4CQ8jk0WtiVhiYNu8JK8YDQ
 """
-import logging
 from config import Config
 from google import Spreadsheet
 import google as send_gmail
 from knowledge import Knowledge, Project
 from oauth2client import tools
 from apiclient import errors
-
-FORMAT = '%(name)s %(levelname)-5s %(message)s'
-logging.basicConfig(format=FORMAT)
-logger = logging.getLogger('stack')
-logger.addHandler(logging.NullHandler())
-logger.setLevel(logging.DEBUG)
-logging.getLogger('elasticsearch').setLevel(logging.ERROR)
-logging.getLogger('googleapiclient.http').setLevel(logging.ERROR)
-logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
+from utils import logger_builder
 
 try:
     import argparse
@@ -40,6 +31,8 @@ except ImportError:
 
 sheet = args['sheet_id'] or None
 notify = args['notify'] or False
+logging_level = args['logging_level'] or 'ERROR'
+logger = logger_builder.initLogger(logging_level)
 
 config = Config()
 spreadsheet_api = Spreadsheet(flags)

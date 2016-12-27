@@ -7,32 +7,35 @@ python script_stack_last_activity.py --help
 # process all spreadsheets and notify errors by email
 python script_stack_last_activity.py --notify
 """
-import logging
 from config import Config
 from google import Spreadsheet
+import google as send_gmail
 from stack import Stack
 from knowledge import Knowledge, Project
-import google as send_gmail
 from oauth2client import tools
 from apiclient import errors
-
-FORMAT = '%(name)s %(levelname)-5s %(message)s'
-logging.basicConfig(format=FORMAT)
-logger = logging.getLogger('stack')
-logger.addHandler(logging.NullHandler())
-logger.setLevel(logging.DEBUG)
-logging.getLogger('elasticsearch').setLevel(logging.ERROR)
-logging.getLogger('googleapiclient.http').setLevel(logging.ERROR)
-logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
+from utils import logger_builder
 
 try:
     import argparse
     parser = argparse.ArgumentParser(parents=[tools.argparser])
-    parser.add_argument('--notify', action='store_true', default=False, help='If notify is defined, then errors will be sent by email', required=False)
+    parser.add_argument(
+        '--logging_level', default='ERROR',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+        help='Set the logging level of detail.')
+    parser.add_argument(
+        '--notify',
+        action='store_true',
+        default=False,
+        help='If notify is defined, then errors will be sent by email',
+        required=False)
     flags = parser.parse_args()
     args = vars(flags)
 except ImportError:
     flags = None
+
+logging_level = args['logging_level'] or 'ERROR'
+logger = logger_builder.initLogger(logging_level)
 
 notify = args['notify'] or False
 

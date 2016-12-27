@@ -1,21 +1,29 @@
 """Script file for skill."""
-import logging
 from config import Config
 from people import Profile
 from knowledge import Skill
 from techgallery import TechGallery
-
-FORMAT = '%(name)s %(levelname)-5s %(message)s'
-logging.basicConfig(format=FORMAT)
-logger = logging.getLogger('stack')
-logger.addHandler(logging.NullHandler())
-logger.setLevel(logging.DEBUG)
-logging.getLogger('elasticsearch').setLevel(logging.ERROR)
+from utils import logger_builder
 
 config = Config()
 profile = Profile(config)
 techgallery = TechGallery(config)
 skill = Skill(config)
+
+try:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--logging_level', default='ERROR',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+        help='Set the logging level of detail.')
+    flags = parser.parse_args()
+    args = vars(flags)
+except ImportError:
+    flags = None
+
+logging_level = args['logging_level'] or 'ERROR'
+logger = logger_builder.initLogger(logging_level)
 
 
 def load_skill():

@@ -19,8 +19,9 @@ class ProfileTestCase(unittest.TestCase):
 
     def test_has_people_load(self):
         data = self.profile.find_all()
-        list_people = data['hits']['hits']
-        self.assertEquals(len(list_people), 1)
+        # list_people = data['hits']['hits']
+        count_people = data['hits']['hits']
+        self.assertGreaterEqual(count_people, 1)
 
 
 def build_marcus_doc():

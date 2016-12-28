@@ -5,28 +5,32 @@ Stack is a tool that shows technology used in your product. There is a strong in
 ![screenshot from 2016-10-27 13-02-19](https://cloud.githubusercontent.com/assets/6742877/19829377/e83e0b94-9dbd-11e6-84d8-cbad124c8e0f.png)
 
 ## Local installation (recommended for normal developers)
-[Git][] and [Python 2.7.9 ][Python]. For Python you need to install the following modules:
-* pip install flask
-* pip install requests
-* pip install elasticsearch
+You need [Git][] tool for clone this repository:
 
 ```console
 $ git clone https://github.com/marcuslacerda/stack-gallery.git
-$ cd stack-gallery
 ```
 
-You must define these environments on your variable.
+Then, you must use [Python 2.7.9 ][Python] to install the following all libraries required:
 
+```console
+$ cd stack-gallery/app
+$ pip install -r requirements.txt
+```
+If you don't have python local environments, you could use docker environment describe below.
+
+You must define these environments on your variable.
 ```console
 $ export GOOGLE_CLIENT_ID=set-google-client-id-here_or_export-env-vavariable>
 $ export GOOGLE_CLIENT_SECRET=set-google-client-secret-here_or_export-env-vavariable>
 $ export ELASTICSEARCH_URL=url-to-elasticsearch-stack
 ```
 
-Running server local
+At last, you can start the local web server using this command
 
 ```console
-$ python server.py
+$ cd app
+$ python run.py
 ```
 
 ## Running (by docker)

@@ -61,8 +61,8 @@ pip install -r requirements_test.txt -t lib_tests
 ```
 
 To run the tests
-```
-nosetests -v tests
+```console
+$ nosetests -v tests
 ```
 #### Coverage:
 

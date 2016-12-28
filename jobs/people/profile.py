@@ -4,7 +4,7 @@ from utils import database
 
 logger = logging.getLogger('stack')
 index = 'people'
-doc_type = 'login'
+doc_type = 'profile'
 
 class Profile(object):
     """Profile operations."""

@@ -94,6 +94,11 @@ nosetests -v --with-cover --cover-html --cover-package=. tests/
 A detailed report from coverage can be found at cover folder in project's path.
 
 
+## Production
+```
+$ gcloud app deploy -v production
+```
+
 The application will be accessible at http://localhost:5000
 
 [Docker]: https://docs.docker.com/engine/installation

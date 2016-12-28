@@ -2,4 +2,5 @@ requests
 httplib2
 elasticsearch
 python-dotenv
+PyYAML
 mock==2.0.0

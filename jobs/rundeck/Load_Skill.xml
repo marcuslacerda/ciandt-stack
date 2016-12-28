@@ -1,0 +1,29 @@
+<joblist>
+  <job>
+    <description>Load skill evaluation from tech gallery</description>
+    <executionEnabled>true</executionEnabled>
+    <id>7ec0df6c-4b4b-4857-9cae-8224d917a4d5</id>
+    <loglevel>INFO</loglevel>
+    <name>Load Skill</name>
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>delete skill</description>
+        <exec>curl -XDELETE http://104.197.92.45:9200/skill</exec>
+      </command>
+      <command>
+        <description>clone probot</description>
+        <exec>rm -rf stack-gallery &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git</exec>
+      </command>
+      <command>
+        <description>load skill</description>
+        <script><![CDATA[cd stack-gallery/jobs
+echo "======= STARTING SCRIPT ======="
+python -u script_skill.py --logging_level INFO
+echo "======= SCRIPT FINISHED ======="]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>7ec0df6c-4b4b-4857-9cae-8224d917a4d5</uuid>
+  </job>
+</joblist>

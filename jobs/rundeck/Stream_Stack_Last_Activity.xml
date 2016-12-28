@@ -1,0 +1,31 @@
+<joblist>
+  <job>
+    <description>process knowledge map spreadsheet that was updated 10 minutos ago. =&gt; {"@timestamp": {"gte" : "now-10m","lt" :  "now"}}</description>
+    <executionEnabled>true</executionEnabled>
+    <id>8c165e56-faad-4215-b040-4a638e30e301</id>
+    <loglevel>INFO</loglevel>
+    <name>Stream Stack Last Activity</name>
+    <schedule>
+      <dayofmonth />
+      <month day='*' month='*' />
+      <time hour='*' minute='0/5' seconds='0' />
+      <year year='*' />
+    </schedule>
+    <scheduleEnabled>false</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>git clone scripts</description>
+        <exec>rm -rf stack-gallery &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git</exec>
+      </command>
+      <command>
+        <description>run python script</description>
+        <script><![CDATA[cd stack-gallery/jobs
+echo "======= STARTING SCRIPT ======="
+python -u script_stack_last_activity.py --logging_level WARNING
+echo "======= SCRIPT FINISHED ======="]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>8c165e56-faad-4215-b040-4a638e30e301</uuid>
+  </job>
+</joblist>

@@ -1,0 +1,30 @@
+<joblist>
+  <job>
+    <description></description>
+    <executionEnabled>true</executionEnabled>
+    <id>e766f04a-a182-44a2-87bb-7685ce088b9f</id>
+    <loglevel>INFO</loglevel>
+    <name>Load Knowledge Map</name>
+    <schedule>
+      <month month='*' />
+      <time hour='07' minute='00' seconds='0' />
+      <weekday day='SUN' />
+      <year year='*' />
+    </schedule>
+    <scheduleEnabled>false</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>clonning scripts</description>
+        <exec>rm -rf stack-gallery &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git</exec>
+      </command>
+      <command>
+        <script><![CDATA[cd stack-gallery/jobs
+echo "====== STARTING SCRIPT ======"
+python -u script_knowledgemap.py --logging_level INFO
+echo "====== FINISHED SCRIPT ======"]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>e766f04a-a182-44a2-87bb-7685ce088b9f</uuid>
+  </job>
+</joblist>

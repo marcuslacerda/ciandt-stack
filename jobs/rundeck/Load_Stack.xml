@@ -1,0 +1,30 @@
+<joblist>
+  <job>
+    <description>Load All Stacks</description>
+    <executionEnabled>true</executionEnabled>
+    <id>eecf29fc-2f76-428b-b701-e3423eff7c83</id>
+    <loglevel>INFO</loglevel>
+    <name>Load Stack</name>
+    <schedule>
+      <month month='*' />
+      <time hour='03' minute='30' seconds='0' />
+      <weekday day='*' />
+      <year year='*' />
+    </schedule>
+    <scheduleEnabled>false</scheduleEnabled>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <description>git clone scripts</description>
+        <exec>rm -rf stack-gallery &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git</exec>
+      </command>
+      <command>
+        <script><![CDATA[cd stack-gallery/jobs
+echo "======= STARTING SCRIPT ======="
+python -u script_stack.py --full --logging_level INFO
+echo "======= SCRIPT FINISHED ======="]]></script>
+        <scriptargs />
+      </command>
+    </sequence>
+    <uuid>eecf29fc-2f76-428b-b701-e3423eff7c83</uuid>
+  </job>
+</joblist>

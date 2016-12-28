@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import request
 import logging
 from elasticsearch import Elasticsearch
+from connection import UrlFetchAppEngine
 
 config = {'elasticsearch' : app.config['ELASTICSEARCH_URL']}
 
@@ -13,7 +14,7 @@ config = {'elasticsearch' : app.config['ELASTICSEARCH_URL']}
 @security.login_authorized
 def api_stack(user):
 	r = Database(config)
-	
+
 	return jsonify(r.list_stack())
 
 @app.route('/api/stacks/search', methods = ['GET'])
@@ -59,7 +60,7 @@ def api_whoknows_get():
       "sort" : [
           { "endorsementsCount" : "desc" },
           { "skillLevel" : "desc"}
-      ],    
+      ],
       "query": {
           "query_string": {
              "query": q
@@ -103,7 +104,10 @@ def api_whichprojectuses_get():
 
 class Database(object):
 	def __init__(self, config):
-		self.es = Elasticsearch([config['elasticsearch']])	
+		self.es = Elasticsearch(
+			[config['elasticsearch']],
+			connection_class=UrlFetchAppEngine,
+			send_get_body_as='POST')
 
 	def save_document(self, index, document_type, document, id=None):
 		res = self.es.index(index=index, doc_type=document_type, body=document, id=id)
@@ -115,7 +119,7 @@ class Database(object):
 		"""
 		resp = self.es.search(index=index, body=query, size=size)
 		logger.debug("%d documents found" % resp['hits']['total'])
-		
+
 		return resp
 
 	def search_stack(self, q):
@@ -123,10 +127,10 @@ class Database(object):
 		    "query": {
 		        "query_string": {
 		           "query": q
-		        }        
+		        }
 		    }
 		}
-		logger.debug('query %s' % query) 
+		logger.debug('query %s' % query)
 
 		data = self.search_by_query('stack', query, 2500)
 		list_stack = []
@@ -145,7 +149,7 @@ class Database(object):
 			stack['like_count'] = 0
 			list_stack.append(item['_source'])
 
-		return list_stack	
+		return list_stack
 
 	def get_stack(self, id, source):
 		if source:

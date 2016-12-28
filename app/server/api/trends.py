@@ -6,6 +6,8 @@ from flask import jsonify
 import logging
 from elasticsearch import Elasticsearch
 
+from connection import UrlFetchAppEngine
+
 config = {'elasticsearch' : app.config['ELASTICSEARCH_URL']}
 
 @app.route('/api/trends/owners')
@@ -24,7 +26,10 @@ def api_trends_technologies(user):
 
 class Database(object):
   def __init__(self, config):
-    self.es = Elasticsearch([config['elasticsearch']])  
+    self.es = Elasticsearch(
+        [config['elasticsearch']],
+        connection_class=UrlFetchAppEngine,
+        send_get_body_as='POST')
 
 
   def search_trends_owners(self, size):
@@ -61,13 +66,13 @@ class Database(object):
         }
     }
 
-    return self.search_aggs_by_query(query)    
+    return self.search_aggs_by_query(query)
 
 
   def search_aggs_by_query(self, query):
     index = 'stack'
     data = self.es.search(index=index, body=query)
-    
+
     list_trends = []
     for item in data['aggregations']['owners']['buckets']:
       doc = {
@@ -76,5 +81,4 @@ class Database(object):
       }
       list_trends.append(doc)
 
-    return list_trends       
-
+    return list_trends

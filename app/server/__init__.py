@@ -6,8 +6,6 @@ import logging
 import os
 from dotenv import load_dotenv
 
-mode = sys.argv[1] if len(sys.argv) > 1 else 'development'
-
 current_path = os.path.dirname(__file__)
 client_path = os.path.abspath(os.path.join(current_path, '..', 'client'))
 
@@ -20,6 +18,7 @@ app = Flask('stack', static_url_path='', static_folder=client_path)
 ################
 #### config ####
 ################
+mode = util.get_environ(app.config, 'MODE') or 'development'
 app.config.from_json('%s.json' % mode)
 app.config['GOOGLE_CLIENT_SECRET'] = util.get_environ(app.config, 'GOOGLE_CLIENT_SECRET')
 app.config['GOOGLE_CLIENT_ID'] = util.get_environ(app.config, 'GOOGLE_CLIENT_ID')

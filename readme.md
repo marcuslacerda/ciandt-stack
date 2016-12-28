@@ -1,12 +1,28 @@
 # Stack Gallery
 
-Stack is a tool that shows technology used in your product. There is a strong integration with [Tech Gallery][techgallery] and [Knowledge Map][knowledge]
+Stack is a tool that shows technology used in your product. There is a strong integration with [Tech Gallery][techgallery] and [Knowledge Map][knowledge-map]
 
 ![screenshot from 2016-10-27 13-02-19](https://cloud.githubusercontent.com/assets/6742877/19829377/e83e0b94-9dbd-11e6-84d8-cbad124c8e0f.png)
 
-## Local installation (recommended for normal developers)
-You need [Git][] tool for clone this repository:
+## Before start is necessary have previously installed:
+- [Git][Git]
+- [Python 2.7.9](https://www.python.org/)
+- [Pip](https://packaging.python.org/installing/)
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts)
+- [Elasticsearch][Elasticsearch]
+### Optional:
+- [Docker][Docker]
 
+### Google App Engine Account
+- Create new [google account](https://console.cloud.google.com/)
+- Create a new OAUTH account.
+- Use this account in JS file:
+```
+$ app/client/app/app.js
+```
+- Find by **clientId** and put that key on there.
+
+### Clone this repository:
 ```console
 $ git clone https://github.com/marcuslacerda/stack-gallery.git
 ```
@@ -15,7 +31,7 @@ Then, you must use [Python 2.7.9 ][Python] to install the following all librarie
 
 ```console
 $ cd stack-gallery/app
-$ pip install -r requirements.txt
+$ pip install -r requirements.txt -t app/lib
 ```
 If you don't have python local environments, you could use docker environment describe below.
 
@@ -26,11 +42,16 @@ $ export GOOGLE_CLIENT_SECRET=set-google-client-secret-here_or_export-env-vavari
 $ export ELASTICSEARCH_URL=url-to-elasticsearch-stack
 ```
 
-At last, you can start the local web server using this command
+At last, you can start the local web server using this command and access url http://localhost:5000
 
 ```console
 $ cd app
-$ python run.py
+$ python run_local.py
+```
+
+If you have gcloud environment, you can use the command bellow and access url  http://localhost:8080:
+```console
+$ dev_appserver.py .
 ```
 
 ## Running (by docker)
@@ -78,7 +99,7 @@ The application will be accessible at http://localhost:5000
 [Docker]: https://docs.docker.com/engine/installation
 [Google APIs console]: https://code.google.com/apis/console
 [techgallery]: https://github.com/ciandt-dev/tech-gallery
-[knowledge]: https://github.com/marcuslacerda/tech-gallery-knowledgemap
+[knowledge-map]: https://docs.google.com/presentation/d/19kGlJn8RV-K60-jgcjh57NVSo5O838T98VfsrXe-Hh4/edit#slide=id.g16d5cef21f_0_262
 [Git]: http://help.github.com/set-up-git-redirect
 [Python]: https://www.python.org
 [Pull requests]: https://help.github.com/categories/collaborating-on-projects-using-issues-and-pull-requests/

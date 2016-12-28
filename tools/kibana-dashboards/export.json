@@ -1,0 +1,656 @@
+[
+  {
+    "_id": "Tech-Gallery-Board",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Knowledge Map Board",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[\n  {\n    \"col\": 1,\n    \"id\": \"Flow-Skill-Index\",\n    \"panelIndex\": 2,\n    \"row\": 1,\n    \"size_x\": 4,\n    \"size_y\": 4,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 1,\n    \"id\": \"Skill-Relevancy\",\n    \"panelIndex\": 3,\n    \"row\": 8,\n    \"size_x\": 4,\n    \"size_y\": 3,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 5,\n    \"id\": \"Technology-Analysis\",\n    \"panelIndex\": 5,\n    \"row\": 5,\n    \"size_x\": 8,\n    \"size_y\": 3,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 5,\n    \"id\": \"Top-50-Gaps\",\n    \"panelIndex\": 6,\n    \"row\": 8,\n    \"size_x\": 8,\n    \"size_y\": 3,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 5,\n    \"id\": \"Heatmap-Gap-vs-Flow\",\n    \"panelIndex\": 7,\n    \"row\": 1,\n    \"size_x\": 8,\n    \"size_y\": 4,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 1,\n    \"id\": \"Top-30-Necessity-List\",\n    \"panelIndex\": 8,\n    \"row\": 5,\n    \"size_x\": 4,\n    \"size_y\": 3,\n    \"type\": \"visualization\"\n  }\n]",
+      "optionsJSON": "{\n  \"darkTheme\": false\n}",
+      "uiStateJSON": "{\n  \"P-3\": {\n    \"vis\": {\n      \"legendOpen\": false\n    }\n  },\n  \"P-5\": {\n    \"vis\": {\n      \"legendOpen\": true\n    }\n  }\n}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"filter\": [\n    {\n      \"$state\": {\n        \"store\": \"appState\"\n      },\n      \"meta\": {\n        \"alias\": null,\n        \"disabled\": false,\n        \"index\": \"project\",\n        \"key\": \"flow\",\n        \"negate\": true,\n        \"value\": \"flow_projeto\"\n      },\n      \"query\": {\n        \"match\": {\n          \"flow\": {\n            \"query\": \"flow_projeto\",\n            \"type\": \"phrase\"\n          }\n        }\n      }\n    },\n    {\n      \"$state\": {\n        \"store\": \"appState\"\n      },\n      \"meta\": {\n        \"alias\": null,\n        \"disabled\": true,\n        \"index\": \"knowledge\",\n        \"key\": \"tower.raw\",\n        \"negate\": false,\n        \"value\": \"UMKT_Commerce\"\n      },\n      \"query\": {\n        \"match\": {\n          \"tower.raw\": {\n            \"query\": \"UMKT_Commerce\",\n            \"type\": \"phrase\"\n          }\n        }\n      }\n    },\n    {\n      \"query\": {\n        \"query_string\": {\n          \"analyze_wildcard\": true,\n          \"query\": \"*\"\n        }\n      }\n    }\n  ]\n}"
+      }
+    }
+  },
+  {
+    "_id": "Skill-Board",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Skill Board",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"Tech-Gallery-Metrics\",\"panelIndex\":1,\"row\":1,\"size_x\":7,\"size_y\":2,\"type\":\"visualization\"},{\"col\":8,\"id\":\"TechGallery-Metrics-By-Area\",\"panelIndex\":3,\"row\":1,\"size_x\":5,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"TechGallery-Evaluation-By-Role\",\"panelIndex\":4,\"row\":6,\"size_x\":4,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"TechGallery-Jedi-Metrics\",\"panelIndex\":6,\"row\":9,\"size_x\":4,\"size_y\":3,\"type\":\"visualization\"},{\"col\":5,\"columns\":[\"login\",\"technologyName\",\"endorsementsCount\"],\"id\":\"Skill-Jedi\",\"panelIndex\":7,\"row\":9,\"size_x\":3,\"size_y\":8,\"sort\":[\"endorsementsCount\",\"desc\"],\"type\":\"search\"},{\"col\":8,\"id\":\"Tech-Gallery-Digital-Skill-Average\",\"panelIndex\":9,\"row\":6,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":8,\"id\":\"Tech-Gallery-Digital-Evaluation-Count\",\"panelIndex\":10,\"row\":9,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Tech-Gallery-Jedi-By-Technology\",\"panelIndex\":11,\"row\":12,\"size_x\":4,\"size_y\":5,\"type\":\"visualization\"},{\"col\":5,\"id\":\"Tech-Gallery-Evaluation-By-City\",\"panelIndex\":12,\"row\":6,\"size_x\":3,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Tech-Gallery-Top-50-Technologies-Skilllevel\",\"panelIndex\":13,\"row\":3,\"size_x\":7,\"size_y\":3,\"type\":\"visualization\"},{\"col\":8,\"id\":\"Tech-Gallery-Matrix-Technology-Skill-By-Area\",\"panelIndex\":14,\"row\":12,\"size_x\":5,\"size_y\":5,\"type\":\"visualization\"},{\"col\":8,\"id\":\"Tech-Gallery-Endorsements-by-Login\",\"panelIndex\":15,\"row\":3,\"size_x\":5,\"size_y\":3,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-10\":{\"vis\":{\"legendOpen\":false}},\"P-11\":{\"vis\":{\"legendOpen\":false}},\"P-13\":{\"vis\":{\"legendOpen\":false}},\"P-3\":{\"spy\":{\"mode\":{\"fill\":false,\"name\":null}}},\"P-4\":{\"vis\":{\"legendOpen\":true}},\"P-9\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"skill\",\"key\":\"area.raw\",\"negate\":false,\"value\":\"BU Commerce\"},\"query\":{\"match\":{\"area.raw\":{\"query\":\"BU Commerce\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"skill\",\"key\":\"technologyName.raw\",\"negate\":false,\"value\":\"Drupal\"},\"query\":{\"match\":{\"technologyName.raw\":{\"query\":\"Drupal\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":true,\"index\":\"skill\",\"key\":\"role.raw\",\"negate\":false,\"value\":\"Developer Master\"},\"query\":{\"match\":{\"role.raw\":{\"query\":\"Developer Master\",\"type\":\"phrase\"}}}},{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-Dashboard",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Project Board",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[\n  {\n    \"col\": 1,\n    \"id\": \"Project-Settings\",\n    \"panelIndex\": 1,\n    \"row\": 3,\n    \"size_x\": 5,\n    \"size_y\": 3,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 6,\n    \"id\": \"Project-Top-50-Technologies\",\n    \"panelIndex\": 2,\n    \"row\": 3,\n    \"size_x\": 7,\n    \"size_y\": 3,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 1,\n    \"id\": \"Project-Uptaded-Histogram\",\n    \"panelIndex\": 3,\n    \"row\": 6,\n    \"size_x\": 12,\n    \"size_y\": 2,\n    \"type\": \"visualization\"\n  },\n  {\n    \"col\": 1,\n    \"id\": \"Project-Metrics\",\n    \"panelIndex\": 4,\n    \"row\": 1,\n    \"size_x\": 5,\n    \"size_y\": 2,\n    \"type\": \"visualization\"\n  },\n  {\n    \"id\": \"Project-TKCI-Metric-(Tower-Average)\",\n    \"type\": \"visualization\",\n    \"panelIndex\": 5,\n    \"size_x\": 7,\n    \"size_y\": 2,\n    \"col\": 6,\n    \"row\": 1\n  },\n  {\n    \"id\": \"Project-Setting\",\n    \"type\": \"search\",\n    \"panelIndex\": 6,\n    \"size_x\": 12,\n    \"size_y\": 7,\n    \"col\": 1,\n    \"row\": 8,\n    \"columns\": [\n      \"tower\",\n      \"flow\",\n      \"sheet_id\",\n      \"stack\",\n      \"team\",\n      \"update_by\"\n    ],\n    \"sort\": [\n      \"@timestamp\",\n      \"desc\"\n    ]\n  }\n]",
+      "optionsJSON": "{\n  \"darkTheme\": false\n}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"filter\": [\n    {\n      \"query\": {\n        \"query_string\": {\n          \"query\": \"*\",\n          \"analyze_wildcard\": true\n        }\n      }\n    }\n  ]\n}"
+      }
+    }
+  },
+  {
+    "_id": "Projects-Skill-Board",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Projects Skill Board",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":4,\"id\":\"Tech-Gallery-Top-50-Technologies-Skilllevel\",\"panelIndex\":1,\"row\":1,\"size_x\":9,\"size_y\":3,\"type\":\"visualization\"},{\"col\":4,\"columns\":[\"login\",\"name\",\"technologyName\",\"city\",\"role\",\"skillLevel\",\"endorsementsCount\"],\"id\":\"Skill\",\"panelIndex\":4,\"row\":4,\"size_x\":9,\"size_y\":8,\"sort\":[\"skillLevel\",\"desc\"],\"type\":\"search\"},{\"col\":1,\"id\":\"TechGallery-Metrics-By-Project\",\"panelIndex\":5,\"row\":1,\"size_x\":3,\"size_y\":3,\"type\":\"visualization\"},{\"id\":\"TechGallery-Leaderboard\",\"type\":\"visualization\",\"panelIndex\":6,\"size_x\":3,\"size_y\":8,\"col\":1,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-1\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"apply\":true,\"disabled\":false,\"index\":\"skill\",\"key\":\"area.raw\",\"negate\":false,\"value\":\"BU North Atlantic\"},\"query\":{\"match\":{\"area.raw\":{\"query\":\"BU North Atlantic\",\"type\":\"phrase\"}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"apply\":true,\"disabled\":false,\"index\":\"skill\",\"key\":\"project.raw\",\"negate\":false,\"value\":\"Google\"},\"query\":{\"match\":{\"project.raw\":{\"query\":\"Google\",\"type\":\"phrase\"}}}},{\"meta\":{\"index\":\"skill\",\"key\":\"technologyName.raw\",\"value\":\"App Engine\",\"disabled\":true,\"negate\":false,\"alias\":null},\"query\":{\"match\":{\"technologyName.raw\":{\"query\":\"App Engine\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}},{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-Setting",
+    "_type": "search",
+    "_source": {
+      "title": "Project Setting",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "tower",
+        "flow",
+        "sheet_id",
+        "stack",
+        "team",
+        "update_by"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Wallboard-Events",
+    "_type": "search",
+    "_source": {
+      "title": "Wallboard Events",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "event",
+        "contract",
+        "flow",
+        "update_by",
+        "metric"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"archboard\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Skill-Digital",
+    "_type": "search",
+    "_source": {
+      "title": "Skill Digital",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "login",
+        "technologyName",
+        "endorsementsCount"
+      ],
+      "sort": [
+        "endorsementsCount",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"technologyName:(\\\"Apache Cassandra\\\" OR \\\"Elasticsearch\\\" OR \\\"Redis\\\" OR \\\"MongoDB\\\" OR \\\"Tableau\\\" OR \\\"Apache Hadoop\\\" OR \\\"Apache Spark\\\" OR \\\"Android\\\" OR \\\"iOS\\\" OR \\\"SAP Mobile Platform - SMP\\\" OR \\\"Openshift\\\" OR \\\"Docker\\\" OR \\\"Chef\\\" OR \\\"IBM Bluemix\\\" OR \\\"Google Cloud Platform\\\" OR \\\"Amazon Web Services AWS\\\" OR \\\"App Engine\\\" OR \\\"BigQuery\\\" OR \\\"Google Prediction API\\\" OR \\\"Kony\\\" OR \\\"Phonegap\\\" OR \\\"Xamarin\\\" OR \\\"Objective C\\\")\",\"analyze_wildcard\":true}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Skill-Jedi",
+    "_type": "search",
+    "_source": {
+      "title": "Skill Jedi",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "login",
+        "technologyName",
+        "endorsementsCount"
+      ],
+      "sort": [
+        "endorsementsCount",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"skillLevel:5 AND NOT endorsementsCount:0\",\"analyze_wildcard\":true}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Skill",
+    "_type": "search",
+    "_source": {
+      "title": "Skill",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "login",
+        "name",
+        "technologyName",
+        "city",
+        "role",
+        "skillLevel",
+        "endorsementsCount"
+      ],
+      "sort": [
+        "_score",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Knowledge-Map",
+    "_type": "search",
+    "_source": {
+      "title": "Knowledge Map",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "flow",
+        "technology",
+        "requirement",
+        "relevancy",
+        "gap",
+        "necessity",
+        "skill_index",
+        "sheet_id"
+      ],
+      "sort": [
+        "_score",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+    "_id": "Top-50-Gaps",
+    "_type": "visualization",
+    "_source": {
+      "title": "Top 50 Gaps",
+      "visState": "{\"title\":\"Top 50 Gaps\",\"type\":\"tagcloud\",\"params\":{\"textScale\":\"linear\",\"orientations\":1,\"fromDegree\":0,\"toDegree\":0,\"font\":\"serif\",\"fontStyle\":\"normal\",\"fontWeight\":\"normal\",\"timeInterval\":500,\"spiral\":\"archimedean\",\"minFontSize\":18,\"maxFontSize\":72},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"abs_necessity\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technology.raw\",\"size\":30,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Technology-Analysis",
+    "_type": "visualization",
+    "_source": {
+      "title": "Technology Analysis",
+      "visState": "{\"title\":\"Technology Analysis\",\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"achieve\",\"customLabel\":\"Achieve\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technology.raw\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"abs_necessity\",\"customLabel\":\"Gap\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"colors\":{\"Achieve\":\"#447EBC\",\"Gap\":\"#E24D42\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Skill-Relevancy",
+    "_type": "visualization",
+    "_source": {
+      "title": "Skill Relevancy",
+      "visState": "{\"title\":\"Skill Relevancy\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"relevancy\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technology.raw\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Team-Size",
+    "_type": "visualization",
+    "_source": {
+      "title": "Team Size",
+      "visState": "{\"title\":\"Team Size\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"flow\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"3\"}},{\"id\":\"3\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"team\",\"customLabel\":\"Team Size\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Flow-Skill-Index",
+    "_type": "visualization",
+    "_source": {
+      "title": "Flow Skill Index",
+      "visState": "{\"title\":\"Flow Skill Index\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"5\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"requirement\",\"customLabel\":\"Requirements\"}},{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"skill_index\",\"customLabel\":\"TKCI\"}},{\"id\":\"4\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"contract.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"flow.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Top-30-Necessity-List",
+    "_type": "visualization",
+    "_source": {
+      "title": "Top 30 Necessity List",
+      "visState": "{\"title\":\"Top 30 Necessity List\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"necessity\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"technology.raw\",\"size\":30,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"relevancy\"}},{\"id\":\"4\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-Top-50-Technologies",
+    "_type": "visualization",
+    "_source": {
+      "title": "Project Top 50 Technologies",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"tagcloud\",\"params\":{\"textScale\":\"linear\",\"orientations\":1,\"fromDegree\":0,\"toDegree\":0,\"font\":\"serif\",\"fontStyle\":\"normal\",\"fontWeight\":\"normal\",\"timeInterval\":500,\"spiral\":\"archimedean\",\"minFontSize\":18,\"maxFontSize\":72},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"stack\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-Metrics",
+    "_type": "visualization",
+    "_source": {
+      "title": "Project Metrics",
+      "visState": "{\"title\":\"Project Metrics\",\"type\":\"metric\",\"params\":{\"handleNoResults\":true,\"fontSize\":\"44\"},\"aggs\":[{\"id\":\"3\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"contract\",\"customLabel\":\"Clients\"}},{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Projects\"}},{\"id\":\"2\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"team\",\"customLabel\":\"Unique Logins\"}},{\"id\":\"4\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"stack\",\"customLabel\":\"Unique Technologies\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-TKCI-Metric-(Client-Average)",
+    "_type": "visualization",
+    "_source": {
+      "title": "Project TKCI Metric (Client Average)",
+      "visState": "{\"title\":\"Project TKCI Metric (Client Average)\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":true,\"smoothLines\":false,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"metric\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"contract\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"archboard\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-TKCI-Metric-(Tower-Average)",
+    "_type": "visualization",
+    "_source": {
+      "title": "Project TKCI Metric (Tower Average)",
+      "visState": "{\"title\":\"Project TKCI Metric (Client Average)\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":true,\"smoothLines\":false,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"metric\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"tower\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"archboard\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-Uptaded-Histogram",
+    "_type": "visualization",
+    "_source": {
+      "title": "Project Uptaded Histogram",
+      "visState": "{\"title\":\"Project Uptaded Histogram\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"tower\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"archboard\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Evaluations-by-Area-(%)",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Evaluations by Area (%)",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"percentage\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"3\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"skillLevel\",\"interval\":1,\"extended_bounds\":{}}},{\"id\":\"4\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"city.raw\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Metrics",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Metrics",
+      "visState": "{\"title\":\"Tech Gallery Metrics\",\"type\":\"metric\",\"params\":{\"handleNoResults\":true,\"fontSize\":\"40\"},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"Total People\"}},{\"id\":\"2\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"technologyName.raw\",\"customLabel\":\"Technologies\"}},{\"id\":\"3\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Self Evaluation\"}},{\"id\":\"4\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"endorsementsCount\",\"customLabel\":\"Endorsements\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Digital-Skill-Count",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Digital Skill Count",
+      "visState": "{\"title\":\"\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technologyName.raw\",\"size\":30,\"order\":\"desc\",\"orderBy\":\"_term\"}},{\"id\":\"2\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"technologyName:(\\\"Apache Cassandra\\\" OR \\\"Elasticsearch\\\" OR \\\"Redis\\\" OR \\\"MongoDB\\\" OR \\\"Tableau\\\" OR \\\"Apache Hadoop\\\" OR \\\"Apache Spark\\\" OR \\\"Android\\\" OR \\\"iOS\\\" OR \\\"SAP Mobile Platform - SMP\\\" OR \\\"Openshift\\\" OR \\\"Docker\\\" OR \\\"Chef\\\" OR \\\"IBM Bluemix\\\" OR \\\"Google Cloud Platform\\\" OR \\\"Amazon Web Services AWS\\\" OR \\\"App Engine\\\" OR \\\"BigQuery\\\" OR \\\"Google Prediction API\\\" OR \\\"Kony\\\" OR \\\"Phonegap\\\" OR \\\"Xamarin\\\" OR \\\"Objective C\\\")\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Endorsements-Histogram",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Endorsements Histogram",
+      "visState": "{\"title\":\"TechGallery Endorsements Histogram\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"Login\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"endorsementsCount\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":true,\"colors\":{\"Login\":\"#0A50A1\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"endorsementsCount:[1 TO *]\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Jedi-Endorsements",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Jedi Endorsements",
+      "visState": "{\"title\":\"TechGallery Jedi Endorsements\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"Login\"}},{\"id\":\"2\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"endorsementsCount\",\"interval\":2,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "savedSearchId": "Skill-Jedi",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Jedi-Endorsements-by-City",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Jedi Endorsements by City",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"endorsementsCount\",\"interval\":2,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "Skill-Jedi",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Digital-Evaluation-Count",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Digital Evaluation Count",
+      "visState": "{\"title\":\"Tech Gallery Digital Skill Count\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technologyName.raw\",\"size\":30,\"order\":\"desc\",\"orderBy\":\"_term\"}},{\"id\":\"2\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"technologyName:(\\\"Apache Cassandra\\\" OR \\\"Elasticsearch\\\" OR \\\"Redis\\\" OR \\\"MongoDB\\\" OR \\\"Tableau\\\" OR \\\"Apache Hadoop\\\" OR \\\"Apache Spark\\\" OR \\\"Android\\\" OR \\\"iOS\\\" OR \\\"SAP Mobile Platform - SMP\\\" OR \\\"Openshift\\\" OR \\\"Docker\\\" OR \\\"Chef\\\" OR \\\"IBM Bluemix\\\" OR \\\"Google Cloud Platform\\\" OR \\\"Amazon Web Services AWS\\\" OR \\\"App Engine\\\" OR \\\"BigQuery\\\" OR \\\"Google Prediction API\\\" OR \\\"Kony\\\" OR \\\"Phonegap\\\" OR \\\"Xamarin\\\" OR \\\"Objective C\\\")\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Jedi-By-Technology",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Jedi By Technology",
+      "visState": "{\"title\":\"Tech Gallery Jedi By Technology\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technologyName.raw\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"role.raw\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "savedSearchId": "Skill-Jedi",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Digital-Skill-Average",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Digital Skill Average",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":true,\"yAxis\":{\"max\":5,\"min\":0}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"skillLevel\",\"customLabel\":\"Avg Skill\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technologyName.raw\",\"size\":30,\"order\":\"desc\",\"orderBy\":\"_term\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "Skill-Digital",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Metrics-By-Area",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Metrics By Area",
+      "visState": "{\"title\":\"TechGallery Metrics By Area\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"3\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"People\"}},{\"id\":\"5\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"technologyName.raw\",\"customLabel\":\"Technologies\"}},{\"id\":\"4\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"skillLevel\",\"customLabel\":\"Avg Skilllevel\"}},{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Self Evaluation\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"area.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"3\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Top-50-Technologies-Skilllevel",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Top 50 Technologies Skilllevel",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"skillLevel\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"technologyName.raw\",\"size\":50,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Evaluation-By-City",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Evaluation By City",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"Unique Login\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"city.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Evaluation-By-Role",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Evaluation By Role",
+      "visState": "{\"title\":\"TechGallery Evaluation By Role\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"role.raw\",\"size\":15,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Jedi-Metrics",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Jedi Metrics",
+      "visState": "{\"title\":\"TechGallery Jedi Metrics\",\"type\":\"metric\",\"params\":{\"handleNoResults\":true,\"fontSize\":\"40\"},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"Jedi\"}},{\"id\":\"2\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"technologyName.raw\",\"customLabel\":\"Technologies\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "Skill-Jedi",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Matrix-Technology-Skill-By-Area",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Matrix Technology Skill By Area",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"heatmap\",\"params\":{\"margin\":{\"top\":20,\"right\":200,\"bottom\":100,\"left\":100},\"stroke\":\"#ffffff\",\"strokeWidth\":1,\"padding\":0,\"legendNumberFormat\":\"number\",\"color\":\"YlGn\",\"numberOfColors\":6,\"rowAxis\":{\"filterBy\":0,\"title\":\"technologyName.raw: Ascending\"},\"columnAxis\":{\"filterBy\":0,\"title\":\"area.raw: Ascending\"},\"legendTitle\":\"Sum of skillLevel\"},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"skillLevel\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"columns\",\"params\":{\"field\":\"area.raw\",\"size\":20,\"order\":\"asc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"rows\",\"params\":{\"field\":\"technologyName.raw\",\"size\":30,\"order\":\"asc\",\"orderBy\":\"_term\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"area:BU* AND technologyName:(\\\"Apache Cassandra\\\" OR \\\"Elasticsearch\\\" OR \\\"Redis\\\" OR \\\"MongoDB\\\" OR \\\"Tableau\\\" OR \\\"Apache Hadoop\\\" OR \\\"Apache Spark\\\" OR \\\"Android\\\" OR \\\"iOS\\\" OR \\\"SAP Mobile Platform - SMP\\\" OR \\\"Openshift\\\" OR \\\"Docker\\\" OR \\\"Chef\\\" OR \\\"IBM Bluemix\\\" OR \\\"Google Cloud Platform\\\" OR \\\"Amazon Web Services AWS\\\" OR \\\"App Engine\\\" OR \\\"BigQuery\\\" OR \\\"Google Prediction API\\\" OR \\\"Kony\\\" OR \\\"Phonegap\\\" OR \\\"Xamarin\\\" OR \\\"Objective C\\\")\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Heatmap-Gap-vs-Flow",
+    "_type": "visualization",
+    "_source": {
+      "title": "Heatmap Gap vs Flow",
+      "visState": "{\"title\":\"Heatmap Gap vs Flow\",\"type\":\"heatmap\",\"params\":{\"color\":\"Reds\",\"columnAxis\":{\"filterBy\":0,\"title\":\"technology.raw: Descending\"},\"legendNumberFormat\":\"number\",\"margin\":{\"bottom\":100,\"left\":100,\"right\":200,\"top\":20},\"numberOfColors\":6,\"padding\":0,\"rowAxis\":{\"filterBy\":0,\"title\":\"flow.raw: Descending\"},\"stroke\":\"#ffffff\",\"strokeWidth\":1,\"legendTitle\":\"Sum of abs_necessity\"},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"abs_necessity\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"columns\",\"params\":{\"field\":\"technology.raw\",\"size\":30,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"rows\",\"params\":{\"field\":\"flow.raw\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"knowledge\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Project-Settings",
+    "_type": "visualization",
+    "_source": {
+      "title": "Project Settings",
+      "visState": "{\"title\":\"Project Settings\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"6\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"tower\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"3\"}},{\"id\":\"5\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"contract\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"_term\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"flow\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"3\"}},{\"id\":\"3\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"team\",\"customLabel\":\"Team\"}},{\"id\":\"4\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"team\",\"customLabel\":\"Stack\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"project\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Tech-Gallery-Endorsements-by-Login",
+    "_type": "visualization",
+    "_source": {
+      "title": "Tech Gallery Endorsements by Login",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"endorsementsCount\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"login.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Metrics-By-Project",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Metrics By Project",
+      "visState": "{\"title\":\"TechGallery Metrics By Project\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"3\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"login.raw\",\"customLabel\":\"People\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"area.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"3\"}},{\"id\":\"5\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"project.raw\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"3\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"skill\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "TechGallery-Leaderboard",
+    "_type": "visualization",
+    "_source": {
+      "title": "TechGallery Leaderboard",
+      "visState": "{\"title\":\"TechGallery Leaderboard\",\"type\":\"table\",\"params\":{\"perPage\":20,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"skillLevel\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"login.raw\",\"size\":0,\"order\":\"desc\",\"orderBy\":\"3\"}},{\"id\":\"3\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"endorsementsCount\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "Skill",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]

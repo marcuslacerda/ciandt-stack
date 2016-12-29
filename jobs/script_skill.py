@@ -5,11 +5,6 @@ from knowledge import Skill
 from techgallery import TechGallery
 from utils import logger_builder
 
-config = Config()
-profile = Profile(config)
-techgallery = TechGallery(config)
-skill = Skill(config)
-
 try:
     import argparse
     parser = argparse.ArgumentParser()
@@ -24,6 +19,11 @@ except ImportError:
 
 logging_level = args['logging_level'] or 'ERROR'
 logger = logger_builder.initLogger(logging_level)
+
+config = Config()
+profile = Profile(config)
+techgallery = TechGallery(config)
+skill = Skill(config)
 
 
 def load_skill():

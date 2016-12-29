@@ -12,8 +12,7 @@ python script_knowledgemap.py --notify
 python script_knowledgemap.py --sheet_id 1tsmRA0TOCEpr5aAQA8-B4CQ8jk0WtiVhiYNu8JK8YDQ
 """
 from config import Config
-from google import Spreadsheet
-import google as send_gmail
+from google import Spreadsheet, GMail
 from knowledge import Knowledge, Project
 from oauth2client import tools
 from apiclient import errors
@@ -22,10 +21,6 @@ from utils import logger_builder
 try:
     import argparse
     parser = argparse.ArgumentParser(parents=[tools.argparser])
-    parser.add_argument(
-        '--logging_level', default='ERROR',
-        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
-        help='Set the logging level of detail.')
     parser.add_argument(
         '--sheet_id',
         help='Define the sheet_id',
@@ -50,6 +45,7 @@ config = Config()
 spreadsheet_api = Spreadsheet(flags)
 knowledge = Knowledge(config)
 project = Project(config)
+gmail = GMail(flags)
 
 
 def load_knowledge_map(sheet=None, notify=False):
@@ -64,6 +60,9 @@ def load_knowledge_map(sheet=None, notify=False):
 
     for item in spreadsheets['hits']['hits']:
         spreadsheetId = item['_source']['sheet_id']
+        owner = item['_source']['update_by']
+        flow = item['_source']['flow']
+        contract = item['_source']['contract']
         try:
             knowledge.load_spreadsheet_knowledge_map(
                 spreadsheet_api,
@@ -84,13 +83,13 @@ def load_knowledge_map(sheet=None, notify=False):
                 logger.error("==> exception on %s : %s" % (spreadsheetId, err))
                 if notify:
                     subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
-                    send_gmail.send(owner, subject, spreadsheetId, str(err))
+                    gmail.send(owner, subject, spreadsheetId, str(err))
         except Exception, e:
             total_errs += 1
             logger.error("==> exception on %s : %s" % (spreadsheetId, e))
             if notify:
                 subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
-                send_gmail.send(owner, subject, spreadsheetId, str(e))
+                gmail.send(owner, subject, spreadsheetId, str(e))
                 # finished output log
 
     logger.info('%s spreadsheets with %s errors' % (total_hits, total_errs))

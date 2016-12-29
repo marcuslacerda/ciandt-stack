@@ -99,6 +99,17 @@ A detailed report from coverage can be found at cover folder in project's path.
 $ gcloud app deploy -v production
 ```
 
+# Jobs
+
+## Setup
+
+```
+$ cd $HOME
+$ tar -xvf resources.tar.gz
+```
+
+Google Sheets API must be enabled in your google project configuraration. Enable it by visiting https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=<project-id>
+
 The application will be accessible at http://localhost:5000
 
 [Docker]: https://docs.docker.com/engine/installation

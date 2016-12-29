@@ -8,8 +8,7 @@ python script_stack_last_activity.py --help
 python script_stack_last_activity.py --notify
 """
 from config import Config
-from google import Spreadsheet
-import google as send_gmail
+from google import Spreadsheet, GMail
 from stack import Stack
 from knowledge import Knowledge, Project
 from oauth2client import tools
@@ -19,10 +18,6 @@ from utils import logger_builder
 try:
     import argparse
     parser = argparse.ArgumentParser(parents=[tools.argparser])
-    parser.add_argument(
-        '--logging_level', default='ERROR',
-        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
-        help='Set the logging level of detail.')
     parser.add_argument(
         '--notify',
         action='store_true',
@@ -44,20 +39,26 @@ spreadsheet_api = Spreadsheet(flags)
 knowledge = Knowledge(config)
 project = Project(config)
 stack = Stack(config)
+gmail = GMail(flags)
 
 service = spreadsheet_api.get_service_spreadsheets()
 spreadsheets = project.get_last_10m_activity()
 logger.info('total %s sheets' % spreadsheets['hits']['total'])
 
-for spreadsheet in spreadsheets['hits']['hits']:
-    logger.info('starting %s' % spreadsheet['_source']['sheet_id'])
+for item in spreadsheets['hits']['hits']:
+    spreadsheetId = item['_source']['sheet_id']
+    owner = item['_source']['update_by']
+    flow = item['_source']['flow']
+    contract = item['_source']['contract']
+
+    logger.info('starting %s' % spreadsheetId)
 
     logger.info('=> loading sheet knowledge_map')
     try:
         project = knowledge.load_spreadsheet_knowledge_map(
             spreadsheet_api,
             service,
-            spreadsheet,
+            item,
             notify
         )
 
@@ -75,11 +76,11 @@ for spreadsheet in spreadsheets['hits']['hits']:
             logger.error("==> exception on %s : %s" % (spreadsheetId, err))
             if notify:
                 subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
-                send_gmail.send(owner, subject, spreadsheetId, str(err))
+                gmail.send(owner, subject, spreadsheetId, str(err))
     except Exception, e:
         logger.error("==> exception on %s : %s" % (spreadsheetId, e))
         if notify:
             subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
-            send_gmail.send(owner, subject, spreadsheetId, str(e))
+            gmail.send(owner, subject, spreadsheetId, str(e))
 
 logger.info('spreadsheet process finished')

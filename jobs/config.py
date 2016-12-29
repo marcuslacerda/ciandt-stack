@@ -29,10 +29,10 @@ class Config(object):
 
 
 def load_config(resource_path=None):
-    """Load resources/config.yaml file."""
+    """Load config.yaml file."""
     if not resource_path:
         resource_path = os.path.join(
-            os.path.split(__file__)[0], "resources/config.yaml")
+            os.path.split(__file__)[0], "config.yaml")
 
     with open(resource_path, 'r') as stream:
         try:

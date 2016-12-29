@@ -12,10 +12,6 @@ from knowledge import Knowledge
 from config import Config
 from utils import logger_builder
 
-config = Config()
-stack = Stack(config)
-knowledge = Knowledge(config)
-
 try:
     import argparse
     parser = argparse.ArgumentParser()
@@ -30,7 +26,6 @@ try:
         '--logging_level', default='ERROR',
         choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
         help='Set the logging level of detail.')
-
     flags = parser.parse_args()
     args = vars(flags)
 except ImportError:
@@ -38,6 +33,10 @@ except ImportError:
 
 logging_level = args['logging_level'] or 'ERROR'
 logger = logger_builder.initLogger(logging_level)
+
+config = Config()
+stack = Stack(config)
+knowledge = Knowledge(config)
 
 full = args['full'] or False
 if full:

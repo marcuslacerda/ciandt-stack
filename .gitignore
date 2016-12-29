@@ -11,9 +11,14 @@ __pycache__/
 venv
 
 #  dotenv
-.env
+
 
 
 # libs
 lib_tests
 lib
+
+# credentials
+.env
+*_secret.json
+credentials.tar.gz

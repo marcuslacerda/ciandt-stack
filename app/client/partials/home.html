@@ -2,11 +2,11 @@
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button"  aria-label="Menu" >
       <img class="logo" src="assets/icon/logo_black.png" >
-    </md-button>          
+    </md-button>
     <h3>
       <a href="/#/stacks">Stack</a>
     </h3>
-    <span flex></span>       
+    <span flex></span>
     <section ng-controller="AuthController">
       <md-menu md-position-mode="target-left target" ng-if="isAuthenticated()">
         <md-button aria-label="Open demo menu" class="md-icon-button" style="height: 60px!important; width: 60px!important" ng-click="$mdOpenMenu($event)">
@@ -23,7 +23,7 @@
                 </div>
             </md-button>
           </md-menu-item>
-          -->  
+          -->
           <md-menu-item>
             <md-button ng-click="logout()">
                 <div layout="row" flex>
@@ -44,7 +44,7 @@
     <div layout="row" hide-xs flex="70" layout-align="center center">
       <span class="md-display-3">Discover what other developers are using</span>
     </div>
-    <div flex> 
+    <div flex>
       <div layout="column" layout-align="center center" ng-if="!isAuthenticated()">
         <h1 class="md-title">Log in to Stack with</h1>
         <div layout="row">
@@ -70,7 +70,7 @@
       <div flex>
         <img style="height: 200px" src="assets/icon/card_sample.png" alt="Card Sample">
       </div>
-    </div>          
+    </div>
     <div layout="column" layout-align="center center" style="width: 300px">
       <div flex>
         Make better decision talking with other teams
@@ -78,18 +78,18 @@
       <div flex>
         <img src="assets/icon/team_sample.png" alt="Card Sample">
       </div>
-    </div>          
+    </div>
   </div>
-  
-  <div layout="row" flex style="min-height: 50px"></div> 
+
+  <div layout="row" flex style="min-height: 50px"></div>
 
   <div id="feedback" layout="row" layout-align="center center" >
       <span>To report a bug or an issue please <a href="https://github.com/marcuslacerda/stack-gallery/issues">click here</a>. We are happy to get any feedback</span>
   </div>
 </div>
 
-<md-toolbar id="footer" class="md-medium-tall">        
-  <div layout="column" flex>          
+<md-toolbar id="footer" class="md-medium-tall">
+  <div layout="column" flex>
     <div class="footer-links" layout="row" layout-align="space-around start">
       <div layout="column">
         <span>Another Tools</span>
@@ -107,8 +107,9 @@
       <div layout="column">
         <span>Follow Us</span>
         <a href="https://github.com/marcuslacerda/stack-gallery">GitHub</a>
+        <a href="https://ciandt-archs.slack.com">Slack Channel</a>
         <a href="https://github.com/marcuslacerda/stack-gallery/issues">Open Issues ([[open_issues]])</a>
       </div>
     </div>
   </div>
-</md-toolbar>  
+</md-toolbar>

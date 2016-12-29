@@ -1,13 +1,13 @@
 /**
-* You must include the dependency on 'ngMaterial' 
+* You must include the dependency on 'ngMaterial'
 */
 
-var app = angular.module('StarterApp', ['ngMaterial', 
-  'ngMdIcons', 
-  'ngResource', 
-  'ngAnimate', 
+var app = angular.module('StarterApp', ['ngMaterial',
+  'ngMdIcons',
+  'ngResource',
+  'ngAnimate',
   'angular-loading-bar',
-  'ui.router', 
+  'ui.router',
   'satellizer',
   'angular-google-analytics']);
 
@@ -125,7 +125,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       optionalUrlParams: ['access_type', 'approval_prompt'],
       accessType: 'offline',
       approvalPrompt: 'auto',
-      clientId: '146680675139-6fjea6lbua391tfv4hq36hl7kqo7cr96.apps.googleusercontent.com'
+      clientId: '537511090862-o44ttfor8ubf4kabrist10ha38qo2kbl.apps.googleusercontent.com'
     });
 
 });
@@ -149,4 +149,3 @@ $mdThemingProvider.theme('default').primaryPalette('customBlue', {
 $mdThemingProvider.theme('input', 'default')
     .primaryPalette('grey')
 });
-

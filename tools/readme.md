@@ -29,6 +29,16 @@ services:
            # - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd
            - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
 ```
+
+## Elasticsearch
+Alterar a configuração do volume para armazenar os dados em um diretório conhecido.
+```
+stack-elasticsearch:
+    image: elasticsearch:2.4.3
+    volumes:
+       - /home/mlacerda/data:/usr/share/elasticsearch/data
+```
+
 ## Kibana
 Existe um dockerfile custom do Kibana para instalação de plugins para grãfico e autenticação oauth.
 
@@ -42,7 +52,6 @@ oauth2.redirectUri
 ```
 Opctionalmente, pode será necessário configurar o oauth2.redirectUri se existe um proxy/redirect para o seu kibana. Exemplo oauth2.redirectUri: https://techanalytics.ciandt.com
 
-## Elasticsearch
 
 
 ## Nginx

@@ -108,6 +108,8 @@ $ cd $HOME
 $ tar -xvf resources.tar.gz
 ```
 
+
+
 Google Sheets API must be enabled in your google project configuraration. Enable it by visiting https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=<project-id>
 
 The application will be accessible at http://localhost:5000

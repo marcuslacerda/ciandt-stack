@@ -73,6 +73,13 @@ class StackSearch(Resource):
     def get(self):
         """Simple search of stacks."""
         query = {
+            "sort": [
+               {
+                  "last_activity": {
+                     "order": "desc"
+                  }
+               }
+            ],        
             "query": {
                 "query_string": {
                    "query": request.args.get('q')
@@ -91,7 +98,18 @@ class StackList(Resource):
     @api.marshal_list_with(stack)
     def get(self):
         """List all stacks."""
-        query = {"query": {"match_all": {}}}
+        query = {
+            "sort": [
+               {
+                  "last_activity": {
+                     "order": "desc"
+                  }
+               }
+            ],
+            "query": {
+                "match_all": {}
+            }
+        }
         return repository.search_by_query(index=index, doc_type=doc_type, query=query)
 
 

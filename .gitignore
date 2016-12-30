@@ -10,10 +10,6 @@ __pycache__/
 .sass-cache
 venv
 
-#  dotenv
-
-
-
 # libs
 lib_tests
 lib

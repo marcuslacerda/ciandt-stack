@@ -14,7 +14,7 @@ services:
 before_install:
 # Install Google App Engine Python SDK
 - if [ ! -d "${GAE_PYTHONPATH}" ]; then
-    python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
+    python tools/scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
   fi
 # If the SDK is not already cached, download it and unpack it
 - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
@@ -35,7 +35,7 @@ install:
 - gcloud config set project stack-ciandt
 - gcloud -q components update gae-python
 before_script:
-- sleep 15
+- sleep 10
 script:
 # print tool versions for debug
 - gcloud version

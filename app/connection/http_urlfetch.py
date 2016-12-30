@@ -5,12 +5,16 @@ import time
 from elasticsearch.compat import urlencode
 import json
 import logging
+from base64 import b64encode
 
 try:
     from google.appengine.api import urlfetch
     URLFETCH_AVAILABLE = True
 except ImportError:
     URLFETCH_AVAILABLE = False
+
+
+logger = logging.getLogger('elasticsearch')
 
 
 class UrlFetchAppEngine(Connection):
@@ -29,22 +33,22 @@ class UrlFetchAppEngine(Connection):
                 :arg url_prefix: optional url prefix for elasticsearch
                 :arg timeout: default timeout in seconds (float, default: 10)
                 """
-                super(UrlFetchAppEngine, self).__init__(host=host, mport=port, use_ssl=use_ssl, **kwargs)
+                super(UrlFetchAppEngine, self).__init__(host=host, port=port, use_ssl=use_ssl, **kwargs)
 
                 self.headers = headers.copy() if headers else {}
 
                 if http_auth is not None:
                     if isinstance(http_auth, (tuple, list)):
                         http_auth = ':'.join(http_auth)
+                        # logger.info('=====>>>> Basic %s' % b64encode(http_auth).decode('utf-8')
 
-                    self.headers['Authorization'] = 'Basic %s' % http_auth.encode('base64')
+                    self.headers['Authorization'] = 'Basic %s' % b64encode(http_auth).decode('utf-8')
 
                 if verify_certs:
                     self.validate_certificate = True
 
                 if use_ssl and not verify_certs:
                     print ('Connecting to %s using SSL with verify_certs=False is insecure.' % self.base_url)
-
 
     def perform_request(self, method, url, params=None, body=None, timeout=None, ignore=()):
         start = time.time()

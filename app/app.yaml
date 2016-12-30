@@ -12,7 +12,6 @@ handlers:
 
 skip_files:
 - ^.git$
-- ^frontend$
 - ^(.*/)?.*\.py[co]$
 - README.md
 - .gitignore

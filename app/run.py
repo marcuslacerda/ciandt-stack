@@ -1,2 +1,2 @@
 #!venv/bin/python
-from server import app
+from backend import app

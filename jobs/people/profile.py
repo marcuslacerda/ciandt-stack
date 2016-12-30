@@ -14,7 +14,7 @@ class Profile(object):
         host = config.get('PROFILE_ELASTICSEARCH_HOST')
         user = config.get('PROFILE_ELASTICSEARCH_USER')
         password = config.get('PROFILE_ELASTICSEARCH_PASS')
-        self.es = database.initEs(host, user, password)
+        self.es = database.initEs(host, user, password)        
         logger.debug('Connecting on %s for %s' % (host, index))
 
     def find_all(self):
@@ -24,7 +24,7 @@ class Profile(object):
 
     def save(self, doc, refresh=False):
         """Save profile document. Create template if it not exists."""
-        database.create_template_if_notexits(self.es, __file__, index)
+        # database.create_template_if_notexits(self.es, __file__, index)
         logger.debug(doc)
         res = self.es.index(
             index=index,

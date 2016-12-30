@@ -122,6 +122,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
     console.log('provider google configured offline')
     $authProvider.google({
+      url: '/api/auth/google',
       optionalUrlParams: ['access_type', 'approval_prompt'],
       accessType: 'offline',
       approvalPrompt: 'auto',

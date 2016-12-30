@@ -7,11 +7,11 @@
     <name>Load Stack</name>
     <schedule>
       <month month='*' />
-      <time hour='03' minute='30' seconds='0' />
+      <time hour='08' minute='00' seconds='0' />
       <weekday day='*' />
       <year year='*' />
     </schedule>
-    <scheduleEnabled>false</scheduleEnabled>
+    <scheduleEnabled>true</scheduleEnabled>
     <sequence keepgoing='false' strategy='node-first'>
       <command>
         <description>git clone scripts</description>

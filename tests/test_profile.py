@@ -2,6 +2,7 @@ from config import Config
 from people import Profile
 import unittest
 import os
+import mock_util
 
 class ProfileTestCase(unittest.TestCase):
 
@@ -9,8 +10,18 @@ class ProfileTestCase(unittest.TestCase):
         """Setup API settings for tests."""
         resource_path = os.path.join(
             os.path.split(__file__)[0], "resources/config.yaml")
-        self.profile = Profile(Config(resource_path))
-        self.profile.save(doc=build_marcus_doc(), refresh='wait_for')
+        config = Config(resource_path)
+        self.profile = Profile(config)
+        # self.profile.save(doc=build_marcus_doc(), refresh='wait_for')
+        id = 'kdkdkdkdkd-2012'
+        self.mock_project = build_marcus_doc()
+        mock_util.post(
+            config.get('PROFILE_ELASTICSEARCH_HOST'),
+            'people',
+            'profile',
+            self.mock_project['login'],
+            self.mock_project
+        )
 
     def tearDown(self):
         """Destroy settings created for tests."""

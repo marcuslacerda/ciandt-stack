@@ -7,11 +7,11 @@
     <name>Load Knowledge Map</name>
     <schedule>
       <month month='*' />
-      <time hour='07' minute='00' seconds='0' />
-      <weekday day='SUN' />
+      <time hour='05' minute='00' seconds='0' />
+      <weekday day='*' />
       <year year='*' />
     </schedule>
-    <scheduleEnabled>false</scheduleEnabled>
+    <scheduleEnabled>true</scheduleEnabled>
     <sequence keepgoing='false' strategy='node-first'>
       <command>
         <description>clonning scripts</description>

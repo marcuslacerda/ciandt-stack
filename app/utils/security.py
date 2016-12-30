@@ -1,13 +1,11 @@
-from server import app, logger
+from backend import app, logger
 
-from flask import jsonify, redirect, url_for, session
-from flask import request, abort
+from flask import jsonify, request
 from functools import wraps
 from httplib2 import Http
 import json
 import jwt
 from jwt import DecodeError, ExpiredSignature
-from datetime import datetime, timedelta
 
 VALID_EMAIL_DOMAIN = '@ciandt.com'
 
@@ -54,7 +52,7 @@ def login_authorized(fn):
             response.status_code = 403
             return response
 
-    return decorated_function    
+    return decorated_function
 
 
 def revoke_token(access_token):
@@ -78,7 +76,7 @@ def get_oauth_token(json_web_token):
 
 def create_token(payload):
     token = jwt.encode(payload, app.config['SECRET_KEY'])
-    return token.decode('unicode_escape')  
+    return token.decode('unicode_escape')
 
 def parse_token(req):
     token = req.headers.get('Authorization').split()[1]

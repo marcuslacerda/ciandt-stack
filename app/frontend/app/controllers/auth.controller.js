@@ -1,4 +1,4 @@
-app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdToast', 'Account', 
+app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdToast', 'Account',
   function($scope, $http, $location, $auth, $mdToast, Account){
 
   $scope.isAuthenticated = function() {
@@ -16,7 +16,7 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
         console.log('ERROR')
         console.log(response)
       });
-  }  
+  }
 
   $scope.authenticate = function(provider) {
     console.log('authenticate' + provider)
@@ -27,9 +27,9 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
             .textContent('You have successfully signed in with ' + provider + '!')
             .position('top right')
             .hideDelay(3000)
-        );        
+        );
         // toastr.success('You have successfully signed in with ' + provider + '!');
-        $location.path('/#/stacks');
+        $location.path('/stacks');
       })
       .catch(function(error) {
         if (error.message) {
@@ -39,7 +39,7 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
               .textContent(error.message)
               .position('top right')
               .hideDelay(5000)
-          );                  
+          );
         } else if (error.data) {
           // HTTP response error from server
           // toastr.error(error.data.message, error.status);
@@ -48,16 +48,16 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
               .textContent(error.data.message + ' - ' + error.status)
               .position('top right')
               .hideDelay(5000).toastClass('error')
-          );             
+          );
         } else {
           $mdToast.show(
             $mdToast.simple()
               .textContent(error)
               .position('top right')
               .hideDelay(5000)
-          );   
+          );
         }
-      });        
+      });
   };
 
 
@@ -71,11 +71,11 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
               .textContent('You have been logged out')
               .position('top right')
               .hideDelay(3000)
-          );   
+          );
 
         // toastr.info('You have been logged out');
         $location.path('/');
-      });    
+      });
 
   }
 

@@ -1,5 +1,5 @@
-from server import app, logger
-from server.security import login_authorized
+from backend import app, logger
+from utils import security
 
 import requests
 from flask import jsonify
@@ -11,14 +11,14 @@ from connection import UrlFetchAppEngine
 config = {'elasticsearch' : app.config['ELASTICSEARCH_URL']}
 
 @app.route('/api/trends/owners')
-@login_authorized
+@security.login_authorized
 def api_trends_owners(user):
   database = Database(config)
 
   return jsonify(database.search_trends_owners(15))
 
 @app.route('/api/trends/technologies')
-@login_authorized
+@security.login_authorized
 def api_trends_technologies(user):
   database = Database(config)
 

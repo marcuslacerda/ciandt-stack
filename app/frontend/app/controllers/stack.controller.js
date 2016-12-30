@@ -2,13 +2,13 @@ app.controller('StackController', ['$scope', '$mdDialog', '$resource', '$timeout
 
   $scope.input = ''
 
-  var StackAPI = $resource('api/stacks/:action', 
-      { q : '@q' }, 
+  var StackAPI = $resource('api/stacks/:action',
+      { q : '@q' },
       {
         list : { method : 'GET', isArray: true },
-        search : { method : 'GET', params : {action : 'search'}, isArray: true }
+        search : { method : 'GET', params : {action : '_search'}, isArray: true }
       }
-  );  
+  );
 
   $scope.search = function() {
     Analytics.trackEvent('action', 'search', $scope.input);
@@ -24,7 +24,7 @@ app.controller('StackController', ['$scope', '$mdDialog', '$resource', '$timeout
   };
 
   StackAPI.list(function(data){
-    $scope.projects = data;         
+    $scope.projects = data;
   });
 
   // ----------------------------
@@ -49,15 +49,15 @@ app.controller('StackController', ['$scope', '$mdDialog', '$resource', '$timeout
       }, function() {
         $scope.alert = 'You cancelled the dialog.';
       });
-    });  
+    });
   };
 
 
   $scope.startSearch = function() {
     $scope.showSearch = true
-    $timeout(function () { 
+    $timeout(function () {
             document.getElementById('search_input').focus();
-    }, 10);      
+    }, 10);
   }
 
 $scope.finishSearch = function() {
@@ -69,9 +69,9 @@ $scope.finishSearch = function() {
 
     // list all stacks
     StackAPI.list(function(data){
-      $scope.projects = data;         
-    });         
-  }  
+      $scope.projects = data;
+    });
+  }
 
 
   // ----------------------------
@@ -79,9 +79,9 @@ $scope.finishSearch = function() {
   // ----------------------------
   $scope.keyPress = function(event){
     console.log(event.keyCode + ' - ' + event.altKey);
-    
-    // if keyCode = ENTER (#13) 
-    if ($scope.showSearch) { 
+
+    // if keyCode = ENTER (#13)
+    if ($scope.showSearch) {
       if (event.keyCode == 13) {
         $scope.search()
       }
@@ -90,27 +90,27 @@ $scope.finishSearch = function() {
         $scope.finishSearch()
       }
     }
-  };  
+  };
 
   // ----------------------------
   // -- Left NavBard
   // ----------------------------
-  var TrendsAPI = $resource('api/trends/:action', 
-      { q : '@q' }, 
+  var TrendsAPI = $resource('api/trends/:action',
+      { q : '@q' },
       {
         owners : { method : 'GET', params : {action : 'owners'}, isArray: true },
         techs : { method : 'GET', params : {action : 'technologies'}, isArray: true }
       }
-  );  
+  );
 
   TrendsAPI.owners(function(data){
-    console.log('list owners') 
-    $scope.owners = data;         
-  });    
+    console.log('list owners')
+    $scope.owners = data;
+  });
 
   // TrendsAPI.techs(function(data){
-  //   $scope.techs = data;         
-  // });  
+  //   $scope.techs = data;
+  // });
 
   $scope.toggleLeft = function () {
     $mdSidenav('left').toggle()
@@ -124,7 +124,7 @@ $scope.finishSearch = function() {
       .then(function () {
         $log.debug("close LEFT is done");
       });
-  };  
+  };
 
   //$scope.toggleLeft();
 
@@ -132,7 +132,7 @@ $scope.finishSearch = function() {
   $scope.techsSelected = [];
   /*
    * Function called when checkbox is selected to filter
-   * stack cards. List ownersSelected and techsSelected 
+   * stack cards. List ownersSelected and techsSelected
    * will be used
    */
   $scope.toggle = function (item, list) {
@@ -157,12 +157,12 @@ $scope.finishSearch = function() {
 
     StackAPI.search({ q: param }, function(data){
       $scope.projects = data;
-    });    
+    });
 
   };
 
   function buildQueryParam(field, list) {
-    if (list.length > 0) {    
+    if (list.length > 0) {
       var query = field + ':(';
       var first = list[0];
       query = query + first.name;

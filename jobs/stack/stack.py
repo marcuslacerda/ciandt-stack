@@ -71,3 +71,33 @@ class Stack(object):
     def exists(self, id):
         """Return true if documento id is found."""
         return self.es.exists(index=index, doc_type=doc_type, id=id)
+
+    def delete_by_query(self, search, number=10):
+        """Delete all documents match with search expresstion."""
+        hits = self.es.search(
+            q=search,
+            index=index,
+            _source="_id",
+            size=number,
+            search_type="scan",
+            scroll='5m')
+        logger.debug('Deleting %s records... ' % hits['hits']['total'])
+
+        # Now remove the results.
+        while True:
+            try:
+                # Git the next page of results.
+                scroll = self.es.scroll(
+                    scroll_id=hits['_scroll_id'],
+                    scroll='5m', )
+
+                # We have results initialize the bulk variable.
+                bulk = ""
+
+                # Remove the variables.
+                for result in scroll['hits']['hits']:
+                    bulk = bulk + '{ "delete" : { "_index" : "' + str(result['_index']) + '", "_type" : "' + str(result['_type']) + '", "_id" : "' + str(result['_id']) + '" } }\n'
+
+                self.es.bulk(body=bulk)
+            except Exception:
+                break        

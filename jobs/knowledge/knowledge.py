@@ -86,8 +86,8 @@ class Knowledge(object):
         }
 
         # TODO: this sleep was needed to avoid Insufficient
-        # tokens for quota group and limit 'ReadGroupUSER-100s' 
-        tipe.sleep(5)
+        # tokens for quota group and limit 'ReadGroupUSER-100s'
+        time.sleep(5)
         return doc
 
 

@@ -1,6 +1,7 @@
 """Knowledge class."""
 import logging
 from utils import database
+import time
 
 logger = logging.getLogger('stack')
 index = 'knowledge'
@@ -83,6 +84,10 @@ class Knowledge(object):
             "last_activity": last_activity,
             "index": 0
         }
+
+        # TODO: this sleep was needed to avoid Insufficient
+        # tokens for quota group and limit 'ReadGroupUSER-100s'
+        time.sleep(5)
         return doc
 
 

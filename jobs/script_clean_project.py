@@ -2,6 +2,7 @@
 import logging
 from config import Config
 from knowledge import Knowledge, Project
+from stack import Stack
 
 FORMAT = '%(name)s %(levelname)-5s %(message)s'
 logging.basicConfig(format=FORMAT)
@@ -13,10 +14,10 @@ logging.getLogger('elasticsearch').setLevel(logging.ERROR)
 config = Config()
 knowledge = Knowledge(config)
 project = Project(config)
+stack = Stack(config)
 
-sheet_id = '1NZeRcbswSQbKHgDw8cT0CuWe7-0q8M5YrWlkTbXYnwo'
+sheet_id = '18AjKn8CJwH1yErnJU6DP7waIdPFtYpJqpMLcZgu84Tc'
 
-q = "sheet_id:"+sheet_id
-project.delete_by_query('project', q)
-knowledge.delete_by_query('knowledge', q)
-# stack.delete_by_query('stack', 'key:'+sheet_id)
+project.delete_by_query("sheet_id:"+sheet_id)
+knowledge.delete_by_query("sheet_id:"+sheet_id)
+stack.delete_by_query('key:'+sheet_id)

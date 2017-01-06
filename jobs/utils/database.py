@@ -24,7 +24,6 @@ def create_template_if_notexits(es, file, index):
     Method reads a template definition from file on path ./resources ('%s-template.json' % index)
     where index is a method's parameter
     """
-    logger.info('========> %s' % index )
     if not es.indices.exists_template(name=index):
         logger.info('creating template for index %s' % index)
         resource_path = os.path.join(os.path.split(file)[0], ("%s-template.json" % index ))

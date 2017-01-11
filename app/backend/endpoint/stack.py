@@ -69,10 +69,10 @@ doc_type='setting',
 @api.response(403, 'Authorization token with error')
 class StackSearch(Resource):
     """Shows a list of all people, and lets you POST to add new tasks"""
-    # @api.doc(security='oauth2')
+    @api.doc(security='oauth2')
+    @security.login_authorized
     @api.expect(parser)
     @api.marshal_list_with(stack)
-    @security.login_authorized
     def get(self, user):
         """Simple search of stacks."""
         query = {
@@ -100,8 +100,8 @@ class StackSearch(Resource):
 class StackList(Resource):
     """Shows a list of all people, and lets you POST to add new tasks."""
     @api.doc(security='oauth2')
-    @api.marshal_list_with(stack)
     @security.login_authorized
+    @api.marshal_list_with(stack)
     def get(self, user):
         """List all stacks."""
         query = {
@@ -123,8 +123,8 @@ class StackList(Resource):
 class StackTeam(Resource):
     """Shows a list of all people, and lets you POST to add new tasks."""
     @api.doc(security='oauth2')
-    @api.marshal_list_with(userData)
     @security.login_authorized
+    @api.marshal_list_with(userData)
     def get(self, user, key):
         """List all team of stack."""
         stack = repository.get_document(

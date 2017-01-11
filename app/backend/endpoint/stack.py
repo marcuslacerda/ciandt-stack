@@ -70,7 +70,8 @@ class StackSearch(Resource):
     # @api.doc(security='oauth2')
     @api.expect(parser)
     @api.marshal_list_with(stack)
-    def get(self):
+    @security.login_authorized
+    def get(self, user):
         """Simple search of stacks."""
         query = {
             "sort": [
@@ -79,7 +80,7 @@ class StackSearch(Resource):
                      "order": "desc"
                   }
                }
-            ],        
+            ],
             "query": {
                 "query_string": {
                    "query": request.args.get('q')
@@ -96,7 +97,8 @@ class StackList(Resource):
     """Shows a list of all people, and lets you POST to add new tasks."""
     @api.doc(security='oauth2')
     @api.marshal_list_with(stack)
-    def get(self):
+    @security.login_authorized
+    def get(self, user):
         """List all stacks."""
         query = {
             "sort": [
@@ -118,9 +120,8 @@ class StackTeam(Resource):
     """Shows a list of all people, and lets you POST to add new tasks."""
     @api.doc(security='oauth2')
     @api.marshal_list_with(userData)
-    # @security.login_authorized
-    # def get(self, user, id):
-    def get(self, key):
+    @security.login_authorized
+    def get(self, user, key):
         """List all team of stack."""
         stack = repository.get_document(
             index=index,

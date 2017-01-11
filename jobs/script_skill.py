@@ -25,7 +25,6 @@ profile = Profile(config)
 techgallery = TechGallery(config)
 skill = Skill(config)
 
-
 def load_skill():
     """Save all evaluation skill for each people from Profile database."""
     # retrieve all people

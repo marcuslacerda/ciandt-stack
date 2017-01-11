@@ -1,6 +1,9 @@
 """"TechGallery class."""
 import requests
 import re
+from oauth2client.service_account import ServiceAccountCredentials
+
+SCOPES = 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
 
 
 class TechGallery(object):
@@ -15,13 +18,36 @@ class TechGallery(object):
         self.config = config
         self.endpoint = config.get('TECHGALLERY_ENDPOINT')
 
+    def get_credentials(self):
+        """Get valid user credentials from storage.
+
+        If nothing has been stored, or if the stored credentials are invalid,
+        the OAuth2 flow is completed to obtain the new credentials.
+
+        Returns:
+            Credentials, the obtained credential.
+        """
+        home_dir = os.path.expanduser('~')
+        credential_dir = os.path.join(home_dir, '.resources')
+        if not os.path.exists(credential_dir):
+            os.makedirs(credential_dir)
+        credential_path = os.path.join(credential_dir, 'knowledgemap_service_account.json')
+
+        return ServiceAccountCredentials.from_json_keyfile_name(credential_path, SCOPES)
+
     def profile(self, login):
         """Get a profile data by login.
 
         If profile was not found, then return status_code 404
         """
+        # get access_token and setting header params
+        headers = {}
+        if self.config.get('TECHGALLERY_AUTH'):
+            credentials = self.get_credentials()
+            headers = {'Authorization': credentials.access_token}
+
         url = '%s/profile?email=%s@ciandt.com' % (self.endpoint, login)
-        response = requests.get(url=url)
+        response = requests.get(url=url, headers=headers)
         # TODO: throw exception if response.status_code <> 200
         return response.json(), response.status_code
 
@@ -30,8 +56,14 @@ class TechGallery(object):
 
         If profile was not found, then return status_code 404
         """
+        # get access_token and setting header params
+        headers = {}
+        if self.config.get('TECHGALLERY_AUTH'):
+            credentials = self.get_credentials()
+            headers = {'Authorization': credentials.access_token}
+
         url = '%s/technology/%s' % (self.endpoint, id)
-        response = requests.get(url=url)
+        response = requests.get(url=url, headers=headers)
 
         return response.json(), response.status_code
 

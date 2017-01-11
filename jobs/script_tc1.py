@@ -2,18 +2,17 @@ from oauth2client.service_account import ServiceAccountCredentials
 from httplib2 import Http
 import json
 
-scopes = ['https://www.googleapis.com/auth/userinfo.profile']
+SCOPES = 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
 
 credentials = ServiceAccountCredentials.from_json_keyfile_name(
-    '/Users/marcuslacerda/Downloads/Stack-b8993f313544.json', scopes)
-
+    '/Users/marcuslacerda/Downloads/knowledgemap_service_accoun.json', SCOPES)
 
 
 # Authorize the httplib2.Http object with our credentials
 h = credentials.authorize(Http())
 # h = Http())
 
-tc_url = 'https://tech-gallery.appspot.com/_ah/api/rest/v1/technology'
+tc_url = 'https://tech-gallery-develop.appspot.com/_ah/api/rest/v1/technology'
 # headers = {'Authorization': user['oauth_token']}
 
 headers = {

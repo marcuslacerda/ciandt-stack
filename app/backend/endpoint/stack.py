@@ -65,6 +65,8 @@ index='stack'
 doc_type='setting',
 
 @api.route('/_search')
+@api.response(401, 'Authorization header not defined')
+@api.response(403, 'Authorization token with error')
 class StackSearch(Resource):
     """Shows a list of all people, and lets you POST to add new tasks"""
     # @api.doc(security='oauth2')
@@ -93,6 +95,8 @@ class StackSearch(Resource):
 
 
 @api.route('/')
+@api.response(401, 'Authorization header not defined')
+@api.response(403, 'Authorization token with error')
 class StackList(Resource):
     """Shows a list of all people, and lets you POST to add new tasks."""
     @api.doc(security='oauth2')

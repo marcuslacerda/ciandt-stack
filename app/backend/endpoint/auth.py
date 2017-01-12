@@ -19,12 +19,6 @@ payload = api.model('Payload json', {
     'json': fields.String,
 })
 
-@api.route('/status')
-class ProviderStatus(Resource):
-    """Shows a list of all people, and lets you POST to add new tasks"""
-    def get(self):
-        """List all people."""
-        return {'provider': 'google', 'status': 'ok'}
 
 @api.route('/google')
 class GoogleProvider(Resource):

@@ -124,8 +124,10 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     $authProvider.google({
       url: '/api/auth/google',
       optionalUrlParams: ['access_type', 'approval_prompt'],
+      requiredUrlParams: ['scope'],
+      scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
       accessType: 'offline',
-      approvalPrompt: 'auto',
+      approvalPrompt: 'force',
       clientId: '537511090862-o44ttfor8ubf4kabrist10ha38qo2kbl.apps.googleusercontent.com'
     });
 

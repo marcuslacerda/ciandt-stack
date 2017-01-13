@@ -1,38 +1,35 @@
 from backend import app, logger
-from utils import security
-
 import requests
 from flask import jsonify
 import logging
 from elasticsearch import Elasticsearch
+from repository import Repository
+from utils import security
 
 from connection import UrlFetchAppEngine
 
-config = {'elasticsearch' : app.config['ELASTICSEARCH_URL']}
+repository = Repository(app.config)
+
+index='stack'
+doc_type='setting',
+
 
 @app.route('/api/trends/owners')
-@security.login_authorized
-def api_trends_owners(user):
-  database = Database(config)
-
-  return jsonify(database.search_trends_owners(15))
+# @security.login_authorized
+def api_trends_owners(user=None):
+    query = build_query_trends_owners(15)
+    data = search_aggs_by_query(query)
+    return jsonify(data)
 
 @app.route('/api/trends/technologies')
-@security.login_authorized
+# @security.login_authorized
 def api_trends_technologies(user):
-  database = Database(config)
+    query = build_query_trends_technologies(15)
+    data = search_aggs_by_query(query)
 
-  return jsonify(database.search_trends_technologies(10))
+    return jsonify(data)
 
-class Database(object):
-  def __init__(self, config):
-    self.es = Elasticsearch(
-        [config['elasticsearch']],
-        connection_class=UrlFetchAppEngine,
-        send_get_body_as='POST')
-
-
-  def search_trends_owners(self, size):
+def build_query_trends_owners(size):
     query = {
         "size": 0,
         "aggs": {
@@ -48,9 +45,9 @@ class Database(object):
         }
     }
 
-    return self.search_aggs_by_query(query)
+    return query
 
-  def search_trends_technologies(self, size):
+def build_query_trends_technologies(size):
     query = {
         "size": 0,
         "aggs": {
@@ -66,12 +63,11 @@ class Database(object):
         }
     }
 
-    return self.search_aggs_by_query(query)
+    return query
 
 
-  def search_aggs_by_query(self, query):
-    index = 'stack'
-    data = self.es.search(index=index, body=query)
+def search_aggs_by_query(query):
+    data = repository.search_by_query(index=index, doc_type=doc_type, query=query)
 
     list_trends = []
     for item in data['aggregations']['owners']['buckets']:

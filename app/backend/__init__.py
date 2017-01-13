@@ -46,7 +46,7 @@ if (2, 7) <= sys.version_info < (3, 2):
     for item in app.config['LOGGER']:
         logging.getLogger(item['NAME']).setLevel(int(item['LEVELNO']))
 
-logger = logging.getLogger('profile')
+logger = logging.getLogger(APP_NAME)
 logger.info('starting app => %s ' % id(app))
 logger.info('starting mode => %s ' % mode)
 

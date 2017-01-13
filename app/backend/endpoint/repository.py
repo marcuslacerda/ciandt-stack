@@ -36,7 +36,7 @@ class Repository(object):
             response = self.es.indices.put_template(name=index, body=settings)
             logger.debug("Template %s created" % response['acknowledged'])
 
-    def search_by_query(self, index, doc_type, query):
+    def search_data_by_query(self, index, doc_type, query):
         data = self.es.search(index=index, doc_type=doc_type, body=query, size=2500)
 
         list_data = []
@@ -44,7 +44,11 @@ class Repository(object):
             list_data.append(item['_source'])
         return list_data
 
-    def insert(self, login, document):
+
+    def search_by_query(self, index, doc_type, query):
+        return self.es.search(index=index, doc_type=doc_type, body=query)
+
+    def insert(self, index, doc_type, login, document):
         res = self.es.index(index=index, doc_type=doc_type, body=document, id=login)
         logger.debug("Created documento ID %s" % res['_id'])
 

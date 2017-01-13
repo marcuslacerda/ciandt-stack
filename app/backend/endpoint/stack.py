@@ -3,7 +3,6 @@ from backend import app, logger
 from flask import request
 from flask_restplus import Namespace, Resource, fields
 from repository import Repository
-from elasticsearch import NotFoundError
 from utils import security
 
 
@@ -91,7 +90,7 @@ class StackSearch(Resource):
         }
         logger.debug('query %s' % query)
 
-        return repository.search_by_query(index=index, doc_type=doc_type, query=query)
+        return repository.search_data_by_query(index=index, doc_type=doc_type, query=query)
 
 
 @api.route('/')
@@ -116,7 +115,7 @@ class StackList(Resource):
                 "match_all": {}
             }
         }
-        return repository.search_by_query(index=index, doc_type=doc_type, query=query)
+        return repository.search_data_by_query(index=index, doc_type=doc_type, query=query)
 
 
 @api.route('/team/<key>')

@@ -7,6 +7,12 @@ from flask import jsonify
 import requests
 import json
 from datetime import datetime
+from repository import Repository
+
+repository = Repository(app.config)
+
+index='profile'
+doc_type='google',
 
 api = Namespace('auth', description='Authentication operations')
 
@@ -69,14 +75,33 @@ class GoogleProvider(Resource):
             logger.debug('Tokeninfo =>')
             logger.debug(token_info)
 
-            # Step 5. Create a new account or return an existing one.
-            payload = {
-                'sub': profile['sub'],
-                'iat': datetime.utcnow(),
-                'exp': token_info['exp'],
-                'access_token':token['access_token']
-            }
-            jwt = security.create_token(payload)
+            # Step 5. Sign-up a user process
+            account = {}
+            try:
+                account = repository.get_document(
+                    index=index,
+                    doc_type=doc_type,
+                    id=profile['sub'])
+
+            except Exception as e:
+                account = profile
+                logger.debug('First logging for  %s' % profile['email'])
+                if 'refresh_token' in token:
+                    profile['refresh_token'] = token['refresh_token']
+
+                repository.insert(index=index, doc_type=doc_type, login=profile['sub'], document=profile)
+
+            # Step 6. Create a new account or return an existing one.
+            account['iat'] = datetime.utcnow()
+            account['exp'] = token_info['exp']
+            account['access_token'] = token['access_token']
+            # payload = {
+            #     'sub': profile['sub'],
+            #     'iat': datetime.utcnow(),
+            #     'exp': token_info['exp'],
+            #     'access_token':token['access_token']
+            # }
+            jwt = security.create_token(account)
             return jsonify(token=jwt)
         else:
             return not_authorized(403, 'Invalid email domain. Please sign with ciandt.com acccount')
@@ -97,20 +122,3 @@ def not_authorized(status, error):
     response = jsonify({'code': status,'message': error})
     response.status_code = status
     return response
-
-class User:
-    def __init__(self, id, email=None, password=None, display_name=None,
-                 provider=None):
-        self.id = id
-        if email:
-            self.email = email.lower()
-        if password:
-            self.password = password
-        if display_name:
-            self.display_name = display_name
-        if provider:
-            self.provider = provider
-
-    def to_json(self):
-        return dict(id=self.id, email=self.email, displayName=self.display_name,
-                    google=self.google)

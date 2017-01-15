@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>{{ title }}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.png">
     {% include 'swagger-ui-css.html' %}
     {% include 'swagger-ui-libs.html' %}
     <script type="text/javascript">
@@ -70,9 +71,9 @@
     <div id="api-auth-session">
       <form id="auth_form">
           <div id="auth_container"></div>
-          <span>Put here your oauth Authorization code </span>
+          <span>Put your Google Authorization code to call secured API. See more detail <a href="https://developers.google.com/identity/protocols/OAuth2">here</a>:</span>
           <br/>
-          <input name="auth_input" id="auth_input" placeholder="oauth access_token" size="100"/>
+          <input name="auth_input" id="auth_input" placeholder="enter access_token" size="100"/>
       </form>
     </div>
     <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>

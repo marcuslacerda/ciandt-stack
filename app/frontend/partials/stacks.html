@@ -6,14 +6,14 @@
       </md-button>
       <md-button class="md-icon-button" aria-label="Logo" hide show-gt-md>
         <img class="logo" src="assets/icon/logo_black.png" >
-      </md-button>          
+      </md-button>
       <h3 hide show-gt-md>
         <a href="/#/stacks">Stack</a>
       </h3>
       <span flex></span>
       <md-button aria-label="Search" ng-click="startSearch()">
         <ng-md-icon icon="search"></ng-md-icon>
-      </md-button>          
+      </md-button>
       <section ng-controller="AuthController">
         <md-menu md-position-mode="target-left target" ng-if="isAuthenticated()" hide show-gt-md>
           <md-button aria-label="Open demo menu" class="md-icon-button" style="height: 60px!important; width: 60px!important" ng-click="$mdOpenMenu($event)">
@@ -29,7 +29,7 @@
                     <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
                   </div>
               </md-button>
-            </md-menu-item>  
+            </md-menu-item>
             -->
             <md-menu-item>
               <md-button ng-click="logout()">
@@ -61,7 +61,7 @@
         <ng-md-icon icon="close"></ng-md-icon>
       </md-button>
     </div>
-  </md-toolbar> 
+  </md-toolbar>
 
   <section layout="row" >
 
@@ -103,29 +103,29 @@
 
                 <div layout="row" style="padding-top: 5px" />
                     <div flex layout="column" />
-                      <md-button target="_blank" ng-href="https://docs.google.com/spreadsheets/d/[[item.key]]" ga-track-event="['action', 'openStack']">[[item.name]]</md-button>
+                      <md-button ng-href="/#/stack/[[item.key]]" ga-track-event="['action', 'openStack']">[[item.name]]</md-button>
                       <div layout="row" layout-align="center end" >
                         <span style="font-size: 14px">[[item.owner]]</span>
-                      </div>                        
+                      </div>
                     </div>
-                </div> 
-                
+                </div>
+
                 <md-divider></md-divider>
 
-                <!-- stack images: list of technlogies--> 
+                <!-- stack images: list of technlogies-->
                 <md-card-content layout="row" layout-align="space-between">
-                  <div style="height: 269px; overflow:hidden;">          
+                  <div style="height: 269px; overflow:hidden;">
                     <span ng-repeat="tech in item.stack">
                       <a class="stack-service-logo" href="https://techgallery.ciandt.com/#/technologies/[[tech.technology]]" target="_blank" data-hing="[[tech.technology]">
                         <img alt="[[tech.technologyName]]" title="[[tech.technologyName]]" src="[[tech.imageUrl]]">
                       </a>
-                    </span>  
-                  </div>     
-                </md-card-content>  
+                    </span>
+                  </div>
+                </md-card-content>
                 <!-- stack actions-->
                 </md-card-actions>
                   <md-card-actions layout="row" layout-align="end center">
-                    
+
                     <md-button class="md-icon-button" aria-label="People" ng-click="showTeam($event, item.key)">
                       <md-icon>people</md-icon>
                     </md-button>
@@ -133,7 +133,7 @@
                     <!--
                     <md-button  style="overflow: inherit;" class="md-icon-button badge1" data-badge="[[item.like_count]]" aria-label="Favorite" ng-click="like(item)">
                       <md-icon ng-class="item.like_count > 0 ? 'selected' : 'normal'" aria-label="Favorite">favorite</md-icon>
-                    </md-button>                    
+                    </md-button>
                     -->
                     <div layout="column" layout-align="center center" ng-show="item.last_activity_user != null">
                       <span md-colors="{color:'Grey'}" class="md-caption" title="Last updated by [[item.last_activity_user]]">last activity</span>

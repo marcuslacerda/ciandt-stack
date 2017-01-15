@@ -110,10 +110,18 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
           loginRequired: loginRequired
         }
       })
+      .state('stack', {
+        url: '/stack/:key',
+        templateUrl: 'partials/stack.html',
+        controller: 'StackController',
+        resolve: {
+          loginRequired: loginRequired
+        }
+      })
       .state('stacks', {
         url: '/stacks',
         templateUrl: 'partials/stacks.html',
-        controller: 'StackController',
+        controller: 'StacksController',
         resolve: {
           loginRequired: loginRequired
         }
@@ -126,7 +134,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       url: '/api/auth/google',
       optionalUrlParams: ['access_type', 'approval_prompt'],
       requiredUrlParams: ['scope'],
-      scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
+      scope: ['profile', 'email'],
       accessType: 'offline',
       approvalPrompt: 'auto',
       clientId: '537511090862-o44ttfor8ubf4kabrist10ha38qo2kbl.apps.googleusercontent.com'

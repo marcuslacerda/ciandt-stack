@@ -6,12 +6,13 @@ from flask_restplus import Namespace, Resource, fields
 from flask import jsonify
 import requests
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from repository import Repository
+from elasticsearch import NotFoundError
 
 repository = Repository(app.config)
 
-index='profile'
+index='account'
 doc_type='google',
 
 api = Namespace('auth', description='Authentication operations')
@@ -61,7 +62,7 @@ class GoogleProvider(Resource):
         logger.debug(token)
 
         # Step 2. Retrieve information about the current user.
-        # create user if not exists one
+
         headers = {'Authorization': 'Bearer {0}'.format(token['access_token'])}
         r = requests.get(people_api_url, headers=headers)
         profile = json.loads(r.text)
@@ -83,28 +84,48 @@ class GoogleProvider(Resource):
                     doc_type=doc_type,
                     id=profile['sub'])
 
-            except Exception as e:
-                account = profile
-                logger.debug('First logging for  %s' % profile['email'])
+                # update refresh_token if it was informed (after revoke token)
+                logger.debug('Account found for %s' % profile['email'])
                 if 'refresh_token' in token:
-                    profile['refresh_token'] = token['refresh_token']
+                    logger.debug('A new refresh_token was defined. It will be updated')
+                    repository.update(
+                        index=index,
+                        doc_type=doc_type,
+                        id=profile['sub'],
+                        body={"doc": {"refresh_token":  token['refresh_token']}}
+                    )
+                # if extits, profile will be the accound founded
+                profile['refresh_token'] = account["_source"]['refresh_token']
+            except NotFoundError as e:
+                # create a new user if not exists one account
+                logger.warning('First logging for  %s' % profile['email'])
 
-                repository.insert(index=index, doc_type=doc_type, login=profile['sub'], document=profile)
+                account = profile.copy()
+                account['created_at'] = datetime.utcnow()
 
-            # Step 6. Create a new account or return an existing one.
-            account['iat'] = datetime.utcnow()
-            account['exp'] = token_info['exp']
-            account['access_token'] = token['access_token']
-            # payload = {
-            #     'sub': profile['sub'],
-            #     'iat': datetime.utcnow(),
-            #     'exp': token_info['exp'],
-            #     'access_token':token['access_token']
-            # }
-            jwt = security.create_token(account)
+                if 'refresh_token' in token:
+                    account['refresh_token'] = token['refresh_token']
+
+                repository.insert(index=index, doc_type=doc_type, login=account['sub'], document=account)
+
+            # Step 6. Build and return a json web token.
+            jwt_payload = {
+                'sub': profile['sub'],
+                'iat': datetime.utcnow(),
+                'exp': datetime.utcnow() + timedelta(days=5),
+                'access_token':token['access_token'],
+                'user': profile
+            }
+
+            jwt = security.create_token(jwt_payload)
             return jsonify(token=jwt)
+            # return jsonify(token=token['access_token'])
         else:
-            return not_authorized(403, 'Invalid email domain. Please sign with ciandt.com acccount')
+            return security.response_not_authorized(
+                403,
+                'Invalid email domain. Please sign with ciandt.com acccount'
+                )
+
 
 
 @api.route('/logout')
@@ -117,8 +138,3 @@ class LogoutProvider(Resource):
         security.revoke_token(access_token)
 
         return "Logout Success", 200
-
-def not_authorized(status, error):
-    response = jsonify({'code': status,'message': error})
-    response.status_code = status
-    return response

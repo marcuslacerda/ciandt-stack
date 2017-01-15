@@ -54,7 +54,10 @@ class Repository(object):
 
         return res
 
-    def get_document(self, index, doc_type, id, source):
+    def update (self, index, doc_type, id, body):
+        return self.es.update(index=index, doc_type=doc_type, id=id, body=body)
+
+    def get_document(self, index, doc_type, id, source=None):
         if source:
             return self.es.get(index=index, doc_type=doc_type, id=id, _source=source)
         else:

@@ -120,14 +120,15 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       });
     $urlRouterProvider.otherwise('/');
 
-    console.log('provider google configured offline')
+    $authProvider.tokenHeader = 'jwt-authorization'
+    // $authProvider.tokenHeader = 'Authorization'
     $authProvider.google({
       url: '/api/auth/google',
       optionalUrlParams: ['access_type', 'approval_prompt'],
       requiredUrlParams: ['scope'],
       scope: ['profile', 'email', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
       accessType: 'offline',
-      approvalPrompt: 'force',
+      approvalPrompt: 'auto',
       clientId: '537511090862-o44ttfor8ubf4kabrist10ha38qo2kbl.apps.googleusercontent.com'
     });
 

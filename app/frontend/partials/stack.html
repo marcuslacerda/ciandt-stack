@@ -1,4 +1,4 @@
-<section ng-keyup="keyPress($event)">
+<section >
   <md-toolbar ng-show="!showSearch">
     <div class="md-toolbar-tools">
       <md-button class="md-icon-button" aria-label="Menu" hide-gt-md ng-click="toggleLeft()">
@@ -18,16 +18,6 @@
           </md-button>
 
           <md-menu-content width="4" >
-          <!--
-            <md-menu-item>
-              <md-button ng-href="/#/profile">
-                  <div layout="row" flex>
-                    <p flex>Profile</p>
-                    <md-icon md-menu-align-target md-svg-icon="call:portable-wifi-off" style="margin: auto 3px auto 0;"></md-icon>
-                  </div>
-              </md-button>
-            </md-menu-item>
-            -->
             <md-menu-item>
               <md-button ng-click="logout()">
                   <div layout="row" flex>
@@ -42,33 +32,39 @@
     </div>
   </md-toolbar>
 
-  <section layout="row" >
-
-
-    <md-content flex-sm="grow" flex-md="grow" flex-gt-md="100" layout="column">
+    <md-content layout="column">
 
       <h1>Stack View</h1>
       <span>Last updated by <b>[[stack.last_activity_user]]</b></span>
       <div layout-align="center center" style="padding: 20px; background:#E0E0E0">
           <span><b>DRAFT PAGE:</b> Please help us. Fork <a href="https://github.com/marcuslacerda/stack-gallery">this repo</a> and send your pull request.</span>
-
       </div>
 
       <div layout="row">
-        <md-button class="md-icon-button md-primary" aria-label="Spreadsheet" target="blank" ng-href="https://docs.google.com/spreadsheets/d/[[key]]" ga-track-event="['action', 'open']">
-          <md-icon md-svg-src="/assets/icon/file-excel.svg" style="color: green; padding-top:10px"></md-icon>
-        </md-button>
+        <div layout="row">
+          <md-button class="md-icon-button md-primary" aria-label="Spreadsheet" target="_blank" ng-href="https://docs.google.com/spreadsheets/d/[[key]]" ga-track-event="['action', 'open']">
+            <md-icon md-svg-src="/assets/icon/file-excel.svg" style="color: green; padding-top:10px"></md-icon>
+          </md-button>
 
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Name</label>
-          <input ng-model="stack.name" disabled>
-        </md-input-container>
+          <div layout="row" layout-align="center top">
+            <md-input-container class="md-block">
+              <label>Name</label>
+              <input ng-model="stack.name" disabled>
+            </md-input-container>
 
-        <md-input-container class="md-block" flex-gt-sm>
-          <label>Owner</label>
-          <input ng-model="stack.owner" disabled>
-        </md-input-container>
+            <md-input-container class="md-block">
+              <label>Owner</label>
+              <input ng-model="stack.owner" disabled>
+            </md-input-container>
+          </div>
+        </div>
+        <div>
+          <div style="height: 130px">
+            <nvd3 options="chartOptions" data="memoryChartData"></nvd3>
+          </div>
+        </div>
       </div>
+
 
       <div layout="row">
 
@@ -82,11 +78,11 @@
           <md-content>
 
             <md-list class="md-dense" flex>
-              <md-list-item class="md-3-line" ng-repeat="item in stack.stack" ng-href="https://techgallery.ciandt.com/#/technologies/[[item.technology]]" target="blank">
+              <md-list-item class="md-3-line" ng-repeat="item in stack.stack" ng-href="https://techgallery.ciandt.com/#/technologies/[[item.technology]]" target="_blank">
                 <img ng-src="[[item.imageUrl]]" class="md-avatar" alt="[[item.technologyName]]" />
                 <div class="md-list-item-text" layout="column">
                   <h3>[[item.technologyName]]</h3>
-                  <p>TBD: requirements and achieve</</p>
+                  <!-- <p>TODO: requirements and achieve</</p> -->
                 </div>
               </md-list-item>
             </md-list>
@@ -95,7 +91,7 @@
 
         <div flex-gt-sm="50" flex>
           <md-toolbar layout="row" class="md-hue-3">
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools" layout-align="center center">
               <span>Team</span>
             </div>
           </md-toolbar>
@@ -107,7 +103,7 @@
                 <div class="md-list-item-text" layout="column">
                   <h3>[[item.name]]</h3>
                   <h4>[[item.login]]@ciandt.com</h4>
-                  <p>TBD: tech profile</p>
+                  <!-- <p>TODO: tech profile</p> -->
                 </div>
               </md-list-item>
             </md-list>
@@ -117,5 +113,5 @@
 
     </md-content>
 
-  </section>
+
 </section>

@@ -1,5 +1,6 @@
 <html lang="en">
 <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stack Gallery</title>
   <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png">
@@ -7,6 +8,8 @@
   <link rel="stylesheet" href="assets/css/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/loading-bar.min.css">
+  <link rel="stylesheet" href="assets/vendor/nvd3/build/nv.d3.css">
+
 
   <link type="text/css" rel="stylesheet" href="assets/css/style.css" media="screen,projection"/>
 </head>
@@ -37,7 +40,10 @@
 
   <!-- google analytics module -->
   <script src="assets/vendor/angular-google-analytics.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.9/angular-nvd3.min.js"></script>
+  <script src="assets/vendor/d3/d3.js"></script>
+  <script src="assets/vendor/nvd3/build/nv.d3.js"></script> <!-- or use another assembly -->
+  <script src="assets/vendor/angular-nvd3/dist/angular-nvd3.js"></script>
+
 
   <!-- Your application bootstrap  -->
   <script src="app/app.js" > </script>

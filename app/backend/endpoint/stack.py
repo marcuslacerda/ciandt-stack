@@ -28,7 +28,7 @@ stack = api.model('Stack', {
     'key': fields.String(readOnly=True, description='The unique identifier'),
     'name': fields.String(required=True, description='Full name'),
     'owner': fields.String(required=True, description='Owner of this stack'),
-    'index': fields.Integer(required=False, description='Index of compliance. Range from 0 to 1'),
+    'index': fields.Float(required=False, description='Index of compliance. Range from 0 to 1'),
     # 'like_count': fields.Integer(required=False, description='Index of compliance. Range from 0 to 1'),
     'last_activity': fields.DateTime(required=False, description='Date of last activity on stack'),
     'last_activity_user': fields.String(required=True, description='User login that was responsible for last activity'),

@@ -9,6 +9,7 @@ var app = angular.module('StarterApp', ['ngMaterial',
   'angular-loading-bar',
   'ui.router',
   'satellizer',
+  'nvd3',
   'angular-google-analytics']);
 
 app.config(['$interpolateProvider', function ($interpolateProvider) {

@@ -1,33 +1,55 @@
+"""Trends backend."""
 from backend import app, logger
-import requests
-from flask import jsonify
-import logging
-from elasticsearch import Elasticsearch
+from flask_restplus import Namespace, Resource, fields
 from repository import Repository
 from utils import security
 
-from connection import UrlFetchAppEngine
+
+api = Namespace('trends', description='Trends operations')
+# api.add_resource(PeopleList, '/hello')
+
+trend = api.model('Trend', {
+    'name': fields.String(
+        description=u'The name of bucket',
+        required=True,
+    ),
+    'count': fields.Integer(
+        description=u'The value of bucket',
+        required=True,
+    )
+})
 
 repository = Repository(app.config)
-
 index='stack'
 doc_type='setting',
 
+@api.route('/owners')
+class OwnerTrendsList(Resource):
+    """OwnerTrendsList Operations."""
 
-@app.route('/api/trends/owners')
-# @security.login_authorized
-def api_trends_owners(user=None):
-    query = build_query_trends_owners(15)
-    data = search_aggs_by_query(query)
-    return jsonify(data)
+    @api.doc(security='oauth2')
+    @security.login_authorized
+    @api.marshal_list_with(trend)
+    def get(self, user=None):
+        """List the 15 top owners."""
+        query = build_query_trends_owners(15)
+        data = search_aggs_by_query(query)
+        return data
 
-@app.route('/api/trends/technologies')
-# @security.login_authorized
-def api_trends_technologies(user):
-    query = build_query_trends_technologies(15)
-    data = search_aggs_by_query(query)
 
-    return jsonify(data)
+@api.route('/technologies')
+class TechsTrendsList(Resource):
+    """TechsTrendsList Operations."""
+
+    @api.doc(security='oauth2')
+    @security.login_authorized
+    @api.marshal_list_with(trend)
+    def get(self, user=None):
+        """List the top 15 technolgies."""
+        query = build_query_trends_technologies(15)
+        data = search_aggs_by_query(query)
+
+        return data
 
 def build_query_trends_owners(size):
     query = {

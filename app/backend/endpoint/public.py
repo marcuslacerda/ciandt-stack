@@ -1,90 +1,128 @@
-from backend import app
+from backend import app, logger
+from flask import request
 from backend.version import __version__
-from flask import jsonify
-import logging
-# TODO: refactory and remove this imports
-from elasticsearch import Elasticsearch
-from connection import UrlFetchAppEngine
-
-config = {'elasticsearch' : app.config['ELASTICSEARCH_URL']}
-
-logger = logging.getLogger('stack')
+from flask_restplus import Namespace, Resource, fields
+from repository import Repository
+from utils import security
 
 
-@app.route('/api/public/version', methods = ['GET'])
-def api_version():
-    return jsonify(__version__)
+api = Namespace('public', description='Public operations')
+# api.add_resource(PeopleList, '/hello')
+
+skill = api.model('Skill', {
+    'name': fields.String(
+        description=u'The complete name',
+        required=True,
+    ),
+    'login': fields.String(
+        description=u'The unique login of user',
+        required=True,
+    ),
+    'city': fields.String(
+        description=u'The name of bucket',
+        required=True,
+    ),
+    'skillLevel': fields.Integer(
+        description=u'Skill evaluation level',
+        required=True,
+    ),
+    'endorsementsCount': fields.Integer(
+        description=u'Total of endorsements from another users',
+        required=True,
+    )
+})
+
+knowledge = api.model('knowledge', {
+    'flow': fields.String(
+        description=u'Flow where this technology has been used.',
+        required=True,
+    ),
+    'technology': fields.String(
+        description=u'Technology name as a tech gallery system',
+        required=True,
+    ),
+    'achieve': fields.Integer(
+        description=u'Total achievement for this technology',
+        required=True,
+    )
+})
+
+parser = api.parser()
+parser.add_argument('q', required=True, help='Query param for method GET', location='query')
+
+repository = Repository(app.config)
+
+@api.route('/version')
+class VersionList(Resource):
+    """VersionList Operations."""
+
+    def get(self):
+        """Show versions details."""
+        return __version__
 
 
-@app.route('/api/public/whoknows', methods = ['GET'])
-def api_whoknows_get():
-    q = request.args.get('q')
-    top = request.args.get('top') or 10
-    r = Database(config)
+@api.route('/whoknows')
+class WhoknowsList(Resource):
+    """WhoknowsList Operations."""
 
-    query = {
-      "sort" : [
-          { "endorsementsCount" : "desc" },
-          { "skillLevel" : "desc"}
-      ],
-      "query": {
-          "query_string": {
-             "query": q
-          }
-      }
-    }
+    @api.expect(parser)
+    @api.marshal_list_with(skill)
+    def get(self):
+        """List who knows a specific tecnology.
 
-    data = r.search_by_query(index="skill", query=query, size=top)
-
-    list_stack = []
-    for item in data['hits']['hits']:
-        list_stack.append(item['_source'])
-
-    return jsonify(list_stack)
-
-
-@app.route('/api/public/whichprojectuses', methods = ['GET'])
-def api_whichprojectuses_get():
-    q = request.args.get('q')
-    top = request.args.get('top') or 10
-    r = Database(config)
-
-    query = {
-      "sort" : [
-          { "achieve" : "desc" }
-      ],
-      "query": {
-          "query_string": {
-             "query": q
-          }
-      }
-    }
-
-    data = r.search_by_query(index="knowledge", query=query, size=top)
-
-    list_stack = []
-    for item in data['hits']['hits']:
-        list_stack.append(item['_source'])
-
-    return jsonify(list_stack)
-
-
-class Database(object):
-    def __init__(self, config):
-        self.es = Elasticsearch(
-        [config['elasticsearch']],
-        connection_class=UrlFetchAppEngine,
-        send_get_body_as='POST')
-
-    def save_document(self, index, document_type, document, id=None):
-        res = self.es.index(index=index, doc_type=document_type, body=document, id=id)
-        logger.debug("Created documento ID %s" % res['_id'])
-
-    def search_by_query(self, index, query, size):
+        Result is ordered by endorsementsCount and skillLevel.
         """
-        Sample of query: {"query": {"match_all": {}}}
-        """
-        resp = self.es.search(index=index, body=query, size=size)
-        logger.debug("%d documents found" % resp['hits']['total'])
+        q = request.args.get('q')
+        top = request.args.get('top') or 10
+        query = {
+          "sort": [
+              { "endorsementsCount": "desc" },
+              { "skillLevel": "desc"}
+          ],
+          "query": {
+              "query_string": {
+                 "query": q
+              }
+          }
+        }
 
-        return resp
+        data = repository.search_data_by_query(
+            index="skill",
+            doc_type="technology",
+            query=query,
+            size=top)
+
+        return data
+
+@api.route('/whichprojectuses')
+class WhichProjectUsesList(Resource):
+    """Whichprojectuses Operations."""
+
+    @api.expect(parser)
+    @api.marshal_list_with(knowledge)
+    def get(self):
+        """List which project is using a specific tecnology.
+
+        Result is ordered by achieve.
+        """
+        q = request.args.get('q')
+        top = request.args.get('top') or 10
+
+        query = {
+          "sort": [
+              {"achieve": "desc"}
+          ],
+          "query": {
+              "query_string": {
+                 "query": q
+              }
+          }
+        }
+
+        data = repository.search_data_by_query(
+            index="knowledge",
+            doc_type="tech",
+            query=query,
+            size=top)
+
+        return data

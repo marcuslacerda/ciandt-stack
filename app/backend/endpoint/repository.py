@@ -36,8 +36,8 @@ class Repository(object):
             response = self.es.indices.put_template(name=index, body=settings)
             logger.debug("Template %s created" % response['acknowledged'])
 
-    def search_data_by_query(self, index, doc_type, query):
-        data = self.es.search(index=index, doc_type=doc_type, body=query, size=2500)
+    def search_data_by_query(self, index, doc_type, query, size=2500):
+        data = self.es.search(index=index, doc_type=doc_type, body=query, size=size)
 
         list_data = []
         for item in data['hits']['hits']:
@@ -45,8 +45,8 @@ class Repository(object):
         return list_data
 
 
-    def search_by_query(self, index, doc_type, query):
-        return self.es.search(index=index, doc_type=doc_type, body=query)
+    def search_by_query(self, index, doc_type, query, size=2500):
+        return self.es.search(index=index, doc_type=doc_type, body=query, size=size)
 
     def insert(self, index, doc_type, login, document):
         res = self.es.index(index=index, doc_type=doc_type, body=document, id=login)

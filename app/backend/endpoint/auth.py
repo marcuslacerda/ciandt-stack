@@ -29,7 +29,7 @@ payload = api.model('Payload json', {
 
 @api.route('/google')
 class GoogleProvider(Resource):
-    """Shows a list of all people, and lets you POST to add new tasks"""
+    """Google Auth Operations."""
     # Using OAuth 2.0 to Access Google APIs. Login flow
     # https://developers.google.com/identity/protocols/OAuth2
     # https://developers.google.com/identity/protocols/OpenIDConnect#exchangecode
@@ -38,7 +38,18 @@ class GoogleProvider(Resource):
     # Step 3: Retrieve information about the current user.
     @api.expect(payload)
     def post(self):
-        """List all people."""
+        """Autenticate google user account.
+
+        Expect a request json with clientId, redirectUri and code attributes.
+        Samples:
+         {
+         'clientId': your-google-client-id,
+         'code': '4/xHYKb3CD9gbiXBiL2XPaj_ILlMjXTJbVmBTFCVGBjKo',
+         'accessType': 'offline',
+         'redirectUri': u'http://localhost:8080'
+         }
+
+        """
         access_token_url = 'https://www.googleapis.com/oauth2/v4/token'
         people_api_url = 'https://www.googleapis.com/oauth2/v3/userinfo'
         tokeninfo_url = 'https://www.googleapis.com/oauth2/v3/tokeninfo'

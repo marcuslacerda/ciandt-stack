@@ -58,6 +58,8 @@ class Knowledge(object):
         logger.debug('processing spreadsheet: %s ' % spreadsheetId)
         rangeName = 'TC_Report!A2:K'
 
+        skill_index = 0
+
         result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=rangeName).execute()
         values = result.get('values', [])
         if not values:
@@ -66,6 +68,8 @@ class Knowledge(object):
             items = spreadsheet_api.read_sheet_data(spreadsheetId, values)
             logger.debug('%s technologies on this spreadsheet ' % len(items))
 
+            skill_index = sum(int(items['skill_index']) for i in items)
+            logger.debug('skill index is %s ' % skill_index)
             # refresh flow and contract values from TC_Report sheet
             flow = items[0]['flow']
             contract = items[0]['contract']
@@ -75,6 +79,8 @@ class Knowledge(object):
             self.delete_by_query(q)
             self.bulk_save(items)
             logger.info('==> spreadsheet %s loads successfully ' % spreadsheetId)
+
+        # sum index skill_index
 
         doc = {
             "key": spreadsheetId,

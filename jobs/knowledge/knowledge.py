@@ -88,7 +88,7 @@ class Knowledge(object):
             "name": flow,
             "last_activity_user": owner,
             "last_activity": last_activity,
-            "index": 0
+            "index": skill_index
         }
 
         # TODO: this sleep was needed to avoid Insufficient

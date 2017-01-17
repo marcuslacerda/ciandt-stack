@@ -8,20 +8,20 @@
     <schedule>
       <dayofmonth />
       <month day='*' month='*' />
-      <time hour='*' minute='0/5' seconds='0' />
+      <time hour='*' minute='0/10' seconds='0' />
       <year year='*' />
     </schedule>
-    <scheduleEnabled>false</scheduleEnabled>
+    <scheduleEnabled>true</scheduleEnabled>
     <sequence keepgoing='false' strategy='node-first'>
       <command>
         <description>git clone scripts</description>
-        <exec>rm -rf stack-gallery &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git</exec>
+        <exec>rm -rf stream_stack &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git stream_stack</exec>
       </command>
       <command>
         <description>run python script</description>
-        <script><![CDATA[cd stack-gallery/jobs
+        <script><![CDATA[cd stream_stack/jobs
 echo "======= STARTING SCRIPT ======="
-python -u script_stack_last_activity.py --logging_level WARNING
+python -u script_stack_last_activity.py --notify --logging_level DEBUG
 echo "======= SCRIPT FINISHED ======="]]></script>
         <scriptargs />
       </command>

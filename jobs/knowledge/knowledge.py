@@ -68,7 +68,7 @@ class Knowledge(object):
             items = spreadsheet_api.read_sheet_data(spreadsheetId, values)
             logger.debug('%s technologies on this spreadsheet ' % len(items))
 
-            skill_index = sum(int(items['skill_index']) for i in items)
+            skill_index = sum(float(items['skill_index']) for i in items)
             logger.debug('skill index is %s ' % skill_index)
             # refresh flow and contract values from TC_Report sheet
             flow = items[0]['flow']

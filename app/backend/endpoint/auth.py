@@ -95,7 +95,8 @@ class GoogleProvider(Resource):
                         body={"doc": {"refresh_token":  token['refresh_token']}}
                     )
                 # if extits, profile will be the accound founded
-                profile['refresh_token'] = account["_source"]['refresh_token']
+
+                # profile['refresh_token'] = account["_source"]['refresh_token']
             except NotFoundError as e:
                 # create a new user if not exists one account
                 logger.warning('First logging for  %s' % profile['email'])

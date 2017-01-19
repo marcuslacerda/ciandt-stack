@@ -31,5 +31,5 @@ services:
        volumes:
            # uncomment if you enable auth_basic on nginx para
            # elasticsearch or kibana services
-           # - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd
+           - ./conf/nginx/.htpasswd:/etc/nginx/.htpasswd
            - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf

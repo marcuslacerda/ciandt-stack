@@ -17,7 +17,7 @@ app.config(['$interpolateProvider', function ($interpolateProvider) {
   $interpolateProvider.endSymbol(']]');
 }]);
 
-
+// GOOGLE ANALYTICS CONFIG
 app.config(['AnalyticsProvider', function (AnalyticsProvider) {
    // Add configuration code as desired
    AnalyticsProvider.setAccount('UA-88644810-1');  //UU-XXXXXXX-X should be your tracking code
@@ -71,11 +71,13 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       return deferred.promise;
     }];
 
-    var loginRequired = ['$q', '$location', '$auth', function($q, $location, $auth) {
+    var loginRequired = ['$q', '$location', '$auth', '$rootScope', function($q, $location, $auth, $rootScope) {
       var deferred = $q.defer();
       if ($auth.isAuthenticated()) {
         deferred.resolve();
       } else {
+        console.log('Attempt URL ' + $location.path())
+        $rootScope.postLogInRoute = $location.path()
         $location.path('/login');
       }
       return deferred.promise;
@@ -144,7 +146,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 });
 
 // config theme colors
-
 app.config(function($mdThemingProvider) {
   var customBlueMap =     $mdThemingProvider.extendPalette('light-blue', {
   'contrastDefaultColor': 'light',

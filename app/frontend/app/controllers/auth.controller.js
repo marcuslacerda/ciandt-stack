@@ -1,11 +1,10 @@
-app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdToast', 'Account',
-  function($scope, $http, $location, $auth, $mdToast, Account){
+app.controller('AuthController', ['$scope', '$rootScope', '$http', '$location', '$auth', '$mdToast', 'Account',
+  function($scope, $rootScope, $http, $location, $auth, $mdToast, Account){
 
   $scope.isAuthenticated = function() {
     return $auth.isAuthenticated();
   };
 
-  // TODO - use Account resources
   if ($auth.isAuthenticated()) {
     Account.getProfile()
       .then(function(response) {
@@ -19,7 +18,7 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
   }
 
   $scope.authenticate = function(provider) {
-    console.log('authenticate' + provider)
+    console.log('authenticate with ' + provider)
     $auth.authenticate(provider, {accessType: 'offline'})
       .then(function() {
         $mdToast.show(
@@ -28,8 +27,14 @@ app.controller('AuthController', ['$scope', '$http', '$location', '$auth', '$mdT
             .position('top right')
             .hideDelay(3000)
         );
-        // toastr.success('You have successfully signed in with ' + provider + '!');
-        $location.path('/stacks');
+        if ($rootScope.postLogInRoute != undefined) {
+          // $rootScope.postLogInRoute was defined on loginRequired function
+          console.log('redirect to ' + $rootScope.postLogInRoute )
+          $location.path($rootScope.postLogInRoute);
+        } else {
+          console.log('accessing home page')
+          $location.path('/')
+        }
       })
       .catch(function(error) {
         if (error.message) {

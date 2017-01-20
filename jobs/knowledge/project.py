@@ -115,6 +115,8 @@ class Project(object):
                     if 'image' in tc_tech:
                         logger.debug(tc_tech['image'])
                         image = tc_tech['image']
+                    else:
+                        logger.debug('technology not found %s' % tc_tech)
 
                     doc_tech = {
                         "technology": tech_key,

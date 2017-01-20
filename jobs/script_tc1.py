@@ -11,9 +11,10 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(
 h = credentials.authorize(Http())
 # h = Http())
 
-print credentials.access_token
+print credentials
 
 tc_url = 'https://tech-gallery.appspot.com/_ah/api/rest/v1/technology'
+# profile_url = 'https://tech-gallery.appspot.com/_ah/api/rest/v1/profile?email=%s@ciandt.com' % ('mlacerda')
 # headers = {'Authorization': user['oauth_token']}
 
 headers = {
@@ -32,5 +33,5 @@ print response.status
 print content
 
 
-# profile = json.loads(content)
-# print profile
+profile = json.loads(content)
+print profile

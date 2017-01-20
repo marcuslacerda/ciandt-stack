@@ -5,14 +5,15 @@ import json
 SCOPES = 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
 
 credentials = ServiceAccountCredentials.from_json_keyfile_name(
-    '/Users/marcuslacerda/Downloads/knowledgemap_service_accoun.json', SCOPES)
-
+    '/Users/marcuslacerda/Downloads/knowledgemap_service_account.json', SCOPES)
 
 # Authorize the httplib2.Http object with our credentials
 h = credentials.authorize(Http())
 # h = Http())
 
-tc_url = 'https://tech-gallery-develop.appspot.com/_ah/api/rest/v1/technology'
+print credentials.access_token
+
+tc_url = 'https://tech-gallery.appspot.com/_ah/api/rest/v1/technology'
 # headers = {'Authorization': user['oauth_token']}
 
 headers = {
@@ -21,6 +22,7 @@ headers = {
 }
 body = ''
 
+# h = Http()
 response, content = h.request(
         tc_url,
         method='GET',
@@ -30,5 +32,5 @@ print response.status
 print content
 
 
-profile = json.loads(content)
-print profile
+# profile = json.loads(content)
+# print profile

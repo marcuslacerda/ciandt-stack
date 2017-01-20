@@ -1,6 +1,8 @@
 """"TechGallery class."""
-import requests
+from httplib2 import Http
 import re
+import json
+import os
 from oauth2client.service_account import ServiceAccountCredentials
 
 SCOPES = 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
@@ -40,32 +42,50 @@ class TechGallery(object):
 
         If profile was not found, then return status_code 404
         """
-        # get access_token and setting header params
-        headers = {}
+        # authorize http
         if self.config.get('TECHGALLERY_AUTH'):
             credentials = self.get_credentials()
-            headers = {'Authorization': credentials.access_token}
+            h = credentials.authorize(Http())
+        else:
+            h = Http()
 
         url = '%s/profile?email=%s@ciandt.com' % (self.endpoint, login)
-        response = requests.get(url=url, headers=headers)
-        # TODO: throw exception if response.status_code <> 200
-        return response.json(), response.status_code
+        headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+        response, content = h.request(
+                url,
+                method='GET',
+                headers=headers)
+
+        print response.status
+
+        return json.loads(content), response.status
 
     def technology(self, id):
         """Get details about technology.
 
         If profile was not found, then return status_code 404
         """
-        # get access_token and setting header params
-        headers = {}
+        # authorize http
         if self.config.get('TECHGALLERY_AUTH'):
             credentials = self.get_credentials()
-            headers = {'Authorization': credentials.access_token}
+            h = credentials.authorize(Http())
+        else:
+            h = Http()
 
         url = '%s/technology/%s' % (self.endpoint, id)
-        response = requests.get(url=url, headers=headers)
+        headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8'
+        }
+        response, content = h.request(
+                url,
+                method='GET',
+                headers=headers)
 
-        return response.json(), response.status_code
+        return json.loads(content), response.status
 
 
 black_list = {

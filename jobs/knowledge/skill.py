@@ -26,3 +26,7 @@ class Skill(object):
         logger.debug("Created documento ID %s" % res['_id'])
 
         return res
+
+    def delete_all(self):
+        """Delete all documents."""
+        self.es.indices.delete(index=index)

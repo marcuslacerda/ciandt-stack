@@ -61,4 +61,5 @@ def load_skill():
 
 
 if __name__ == '__main__':
+    skill.delete_all()
     load_skill()

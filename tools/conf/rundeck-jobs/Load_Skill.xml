@@ -14,10 +14,6 @@
     <scheduleEnabled>true</scheduleEnabled>
     <sequence keepgoing='false' strategy='node-first'>
       <command>
-        <description>delete skill</description>
-        <exec>curl -XDELETE http://104.197.92.45:9200/skill</exec>
-      </command>
-      <command>
         <description>clone probot</description>
         <exec>rm -rf stack-gallery &amp;&amp; git clone https://github.com/marcuslacerda/stack-gallery.git</exec>
       </command>

@@ -12,6 +12,8 @@ services:
 # Start elasticsearch server on 9200 port to unittest
 - elasticsearch
 before_install:
+- echo "HOME =>"
+- echo $HOME
 # Install Google App Engine Python SDK
 - if [ ! -d "${GAE_PYTHONPATH}" ]; then
     python tools/scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
@@ -25,6 +27,9 @@ before_install:
 - tar -xzf credentials.tar.gz
 # Env file was stored on credentials.tar.gz.enc. We need to move it for app/ directory
 - mv .env app/
+# Prepare files for unittest
+- mkdir $HOME/.resources
+- mv knowledgemap_service_account.json $HOME/.resources/
 # Here we use the decrypted service account credentials to authenticate the command line tool
 - gcloud auth activate-service-account --key-file service_account_secret.json
 install:

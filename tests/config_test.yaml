@@ -30,3 +30,4 @@ stack:
 
 techgallery:
   endpoint: https://tech-gallery.appspot.com/_ah/api/rest/v1
+  auth: true

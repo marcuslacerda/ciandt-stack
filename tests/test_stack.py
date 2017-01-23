@@ -11,8 +11,8 @@ class StackTestCase(unittest.TestCase):
     def setUp(self):
         """Setup API settings for tests."""
         resource_path = os.path.join(
-            os.path.split(__file__)[0], "resources/config.yaml")
-        config = Config(resource_path)
+            os.path.split(__file__)[0], "config_test.yaml")
+        config = Config(resource_path, False)
         self.stack = Stack(config)
 
         id = 'kdkdkdkdkd-2012'

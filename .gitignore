@@ -8,6 +8,16 @@ __pycache__/
 *$py.class
 *.pybak
 
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
 
 .sass-cache
 venv

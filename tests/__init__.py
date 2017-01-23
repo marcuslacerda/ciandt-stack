@@ -3,6 +3,7 @@ import os
 import sys
 import logging
 
+
 sys.path.insert(1, os.path.abspath(os.curdir))
 sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'lib_tests'))
 sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'jobs'))
@@ -16,3 +17,8 @@ logger.setLevel(logging.DEBUG)
 logging.getLogger('elasticsearch').setLevel(logging.ERROR)
 
 # print sys.path
+
+config_resource_path = os.path.join(os.path.split(__file__)[0], "config_test.yaml")
+
+# import unitttest modules
+import jobs

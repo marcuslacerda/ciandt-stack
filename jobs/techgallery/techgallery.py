@@ -35,7 +35,6 @@ class TechGallery(object):
         if not os.path.exists(credential_dir):
             os.makedirs(credential_dir)
         credential_path = os.path.join(credential_dir, 'knowledgemap_service_account.json')
-        logger.debug("Get service account credentials")
         return ServiceAccountCredentials.from_json_keyfile_name(credential_path, SCOPES)
 
     def profile(self, login):

@@ -69,8 +69,6 @@ class TechGallery(object):
         If profile was not found, then return status_code 404
         """
         # authorize http
-        logger.debug("Get technology %s" % id)
-        logger.debug(self.config.get('TECHGALLERY_AUTH'))
         if self.config.get('TECHGALLERY_AUTH'):
             credentials = self.get_credentials()
             h = credentials.authorize(Http())

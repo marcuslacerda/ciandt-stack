@@ -134,5 +134,5 @@ class GMail(object):
 if __name__ == '__main__':
     flags = []
     gmail = GMail(flags)
-    subject = 'ACTION REQUIRED: Tech Gallery'
+    subject = 'ACTION NEEDED: Tech Gallery'
     gmail.send('mlacerda', subject, '1MAyEuRubYjzELnfbPnO8YPjS9jW-Xm26xTSXQdO_EWM', "texto erro")

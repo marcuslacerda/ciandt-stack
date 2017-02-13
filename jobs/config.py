@@ -10,17 +10,20 @@ logger = logging.getLogger('stack')
 # current_path = os.path.dirname(__file__)
 resources_dir = os.path.join(os.path.expanduser('~'), '.resources')
 dotenv_path = os.path.abspath(os.path.join(resources_dir, '.env'))
-if os.path.exists(dotenv_path):
-    logger.debug('loading .env file')
-    load_dotenv(dotenv_path)
 
 class Config(object):
     """Operations for configuration class."""
 
-    def __init__(self, resource_path=None):
+    def __init__(self, resource_path=None, override=True):
         """Initializing config dictionary."""
         self.original_config = load_config(resource_path)
         self.override_config = {}
+        logger.debug("==>  config mode %s" % override)
+        #  loading .env file if override = True
+        if override and os.path.exists(dotenv_path):
+            logger.debug('loading .env file')
+            load_dotenv(dotenv_path)
+
         override_config(None, self.original_config, self.override_config)
 
     def get(self, key):

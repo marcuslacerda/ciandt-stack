@@ -19,6 +19,7 @@ class Project(object):
         host = config.get('PROJECT_ELASTICSEARCH_HOST')
         user = config.get('PROJECT_ELASTICSEARCH_USER')
         password = config.get('PROJECT_ELASTICSEARCH_PASS')
+        logger.debug('test %s at user %s with %s pass' % (host, user, password))
         self.es = database.initEs(host, user, password)
         self.tc = TechGallery(config)
         logger.debug('Connecting on %s for %s' % (host, index))

@@ -1,9 +1,9 @@
 """Project Unit Test."""
+from tests import mock_util, config_resource_path
 from config import Config
 from knowledge import Project
 import unittest
 import os
-import mock_util
 
 
 class ProjectTestCase(unittest.TestCase):
@@ -11,10 +11,8 @@ class ProjectTestCase(unittest.TestCase):
 
     def setUp(self):
         """Setup API settings for tests."""
-        resource_path = os.path.join(
-            os.path.split(__file__)[0], "resources/config.yaml")
-        config = Config(resource_path)
-        self.project = Project(Config(resource_path))
+        config = Config(config_resource_path, False)
+        self.project = Project(config)
 
         id = "12MK2sfe8qwkyLFi7KWudnAsyYF2kteUCWNk4hX2fB4Y"
         self.doc = mock_util.build_project_jeb(id)

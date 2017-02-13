@@ -1,4 +1,5 @@
 """TechGaller Unit Test."""
+from tests import mock_util, config_resource_path
 from config import Config
 from techgallery import TechGallery
 import techgallery
@@ -11,9 +12,8 @@ class TechGalleryTestCase(unittest.TestCase):
 
     def setUp(self):
         """Setup API settings for tests."""
-        resource_path = os.path.join(
-            os.path.split(__file__)[0], "resources/config.yaml")
-        self.techgallery = TechGallery(Config(resource_path))
+        config = Config(config_resource_path, False)
+        self.techgallery = TechGallery(config)
 
     def test_profile_statuscode_ok(self):
         """TechGallery: load profile for mlacerda return status 200."""

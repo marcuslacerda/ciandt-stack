@@ -8,6 +8,16 @@ __pycache__/
 *$py.class
 *.pybak
 
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
 
 .sass-cache
 venv
@@ -19,4 +29,5 @@ lib
 # credentials
 .env
 *_secret.json
+knowledgemap_service_account.json
 credentials.tar.gz

@@ -1,18 +1,16 @@
 """Stack Unit Test."""
+from tests import mock_util, config_resource_path
 from config import Config
 from stack import Stack
 import unittest
 import os
-import mock_util
 
 class StackTestCase(unittest.TestCase):
     """Stack Test Case."""
 
     def setUp(self):
         """Setup API settings for tests."""
-        resource_path = os.path.join(
-            os.path.split(__file__)[0], "resources/config.yaml")
-        config = Config(resource_path)
+        config = Config(config_resource_path, False)
         self.stack = Stack(config)
 
         id = 'kdkdkdkdkd-2012'

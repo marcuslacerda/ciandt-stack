@@ -3,10 +3,11 @@ from httplib2 import Http
 import re
 import json
 import os
+import logging
 from oauth2client.service_account import ServiceAccountCredentials
 
 SCOPES = 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
-
+logger = logging.getLogger('stack')
 
 class TechGallery(object):
     """TechGallery operations."""
@@ -34,7 +35,6 @@ class TechGallery(object):
         if not os.path.exists(credential_dir):
             os.makedirs(credential_dir)
         credential_path = os.path.join(credential_dir, 'knowledgemap_service_account.json')
-
         return ServiceAccountCredentials.from_json_keyfile_name(credential_path, SCOPES)
 
     def profile(self, login):

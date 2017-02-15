@@ -82,13 +82,13 @@ def load_knowledge_map(sheet=None, notify=False):
                 total_errs += 1
                 logger.error("==> exception on %s : %s" % (spreadsheetId, err))
                 if notify:
-                    subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
+                    subject = 'ACTION NEEDED: Tech Gallery %s-%s' % (contract, flow)
                     gmail.send(owner, subject, spreadsheetId, str(err))
         except Exception, e:
             total_errs += 1
             logger.error("==> exception on %s : %s" % (spreadsheetId, e))
             if notify:
-                subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
+                subject = 'ACTION NEEDED: Tech Gallery %s-%s' % (contract, flow)
                 gmail.send(owner, subject, spreadsheetId, str(e))
                 # finished output log
 

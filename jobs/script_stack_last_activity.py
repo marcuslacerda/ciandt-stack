@@ -75,12 +75,12 @@ for item in spreadsheets['hits']['hits']:
             # send email to owner
             logger.error("==> exception on %s : %s" % (spreadsheetId, err))
             if notify:
-                subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
+                subject = 'ACTION NEEDED: Tech Gallery %s-%s' % (contract, flow)
                 gmail.send(owner, subject, spreadsheetId, str(err))
     except Exception, e:
         logger.error("==> exception on %s : %s" % (spreadsheetId, e))
         if notify:
-            subject = 'ACTION REQUIRED: Tech Gallery %s-%s' % (contract, flow)
+            subject = 'ACTION NEEDED: Tech Gallery %s-%s' % (contract, flow)
             gmail.send(owner, subject, spreadsheetId, str(e))
 
 logger.info('spreadsheet process finished')

@@ -14,12 +14,17 @@ class Profile(object):
         host = config.get('PROFILE_ELASTICSEARCH_HOST')
         user = config.get('PROFILE_ELASTICSEARCH_USER')
         password = config.get('PROFILE_ELASTICSEARCH_PASS')
-        self.es = database.initEs(host, user, password)        
+        self.es = database.initEs(host, user, password)
         logger.debug('Connecting on %s for %s' % (host, index))
 
     def find_all(self):
         """Retrieve all documents."""
         query = '{"query": {"match_all": {}}}'
+        return self.es.search(index=index, doc_type=doc_type, body=query, size=3000)
+
+    def find_all_ativos(self):
+        """Retrieve all valid documents."""
+        query = '{"query": {"match": {"status": "A"}}}'
         return self.es.search(index=index, doc_type=doc_type, body=query, size=3000)
 
     def save(self, doc, refresh=False):

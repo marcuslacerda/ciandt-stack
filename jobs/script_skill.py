@@ -28,7 +28,7 @@ skill = Skill(config)
 def load_skill():
     """Save all evaluation skill for each people from Profile database."""
     # retrieve all people
-    data = profile.find_all()
+    data = profile.find_all_ativos()
     logger.info('%s profile was found' % data['hits']['total'])
     for item in data['hits']['hits']:
         people = item['_source']
@@ -61,5 +61,5 @@ def load_skill():
 
 
 if __name__ == '__main__':
-    skill.delete_all()
+    # skill.delete_all()
     load_skill()

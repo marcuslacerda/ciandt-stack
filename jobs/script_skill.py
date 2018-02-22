@@ -61,5 +61,8 @@ def load_skill():
 
 
 if __name__ == '__main__':
-    skill.delete_all()
+    try:
+        skill.delete_all()
+    except Exception as e:
+        logger.warning('There is no skill index to delete')
     load_skill()

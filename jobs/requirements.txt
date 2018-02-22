@@ -1,0 +1,7 @@
+google-api-python-client
+requests
+httplib2
+elasticsearch
+python-dotenv
+lxml
+PyYAML

@@ -31,7 +31,7 @@ Then, you must use [Python 2.7.9 ][Python] to install the following all librarie
 
 ```console
 $ cd stack-gallery/app
-$ pip install -r requirements.txt -t app/lib
+$ pip install -r requirements.txt -t lib
 ```
 If you don't have python local environments, you could use docker environment describe below.
 
@@ -73,7 +73,7 @@ If you need a full local enviroment, you must start [Elasticsearch] and change e
 You must configure these GOOGLE values from [Google APIs console]
 
 ```console
-$ run docker -p 9200:9200 elasticsearch
+$ docker run -p 9200:9200 elasticsearch
 ```
 
 To execute tests, install all dependencies from requirements_test.txt into lib_tests path:

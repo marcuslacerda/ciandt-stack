@@ -1,3 +1,9 @@
+"""Setting library class path."""
+import os
+import sys
+sys.path.insert(1, os.path.abspath(os.curdir))
+sys.path.insert(1, os.path.join(os.path.abspath(os.curdir), 'lib'))
+
 """Config class."""
 import logging
 import yaml

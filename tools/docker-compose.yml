@@ -2,15 +2,20 @@ version: '2'
 services:
     stack-elasticsearch:
         image: elasticsearch:2.4.3
+        container_name: stack-elasticsearch
         # ports:
         # uncomment if you don't use nginx proxy
         #     - "9300:9300"
         #     - "9200:9200"
         # # uncomment this section to have elasticsearch data persisted to a volume
-        # volumes:
-        #   - /home/stack/data:/usr/share/elasticsearch/data
+        volumes:
+          - /home/stack/data:/usr/share/elasticsearch/data
+        environment:
+          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        mem_limit: 1g
     stack-kibana:
         build: kibana/
+        container_name: stack-kibana
         depends_on:
             - stack-elasticsearch
         # ports:
@@ -22,6 +27,7 @@ services:
             - ./conf/kibana/kibana.yml:/opt/kibana/config/kibana.yml
     stack-nginx:
        image: nginx:1.11.8
+       container_name: stack-nginx
        depends_on:
            - stack-elasticsearch
            - stack-kibana

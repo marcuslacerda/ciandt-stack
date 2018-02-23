@@ -59,8 +59,6 @@ class TechGallery(object):
                 method='GET',
                 headers=headers)
 
-        print response.status
-
         return json.loads(content), response.status
 
     def technology(self, id):

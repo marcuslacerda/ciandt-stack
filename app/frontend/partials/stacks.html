@@ -129,12 +129,11 @@
                     <md-button class="md-icon-button" aria-label="People" ng-click="showTeam($event, item.key)">
                       <md-icon>people</md-icon>
                     </md-button>
-
-                    <!--
+                    
                     <md-button  style="overflow: inherit;" class="md-icon-button badge1" data-badge="[[item.like_count]]" aria-label="Favorite" ng-click="like(item)">
                       <md-icon ng-class="item.like_count > 0 ? 'selected' : 'normal'" aria-label="Favorite">favorite</md-icon>
                     </md-button>
-                    -->
+
                     <div layout="column" layout-align="center center" ng-show="item.last_activity_user != null">
                       <span md-colors="{color:'Grey'}" class="md-caption" title="Last updated by [[item.last_activity_user]]">last activity</span>
                       <span md-colors="{color:'Grey'}" class="md-caption" title="Last updated by [[item.last_activity_user]]">[[item.last_activity | date:'dd-MMM HH:mm']]</span>

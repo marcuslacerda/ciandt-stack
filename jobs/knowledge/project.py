@@ -109,6 +109,7 @@ class Project(object):
                 tech_name = tech
                 if tech_name:
                     tech_key = techgallery.convert_name_to_id(tech_name)
+                    tech_key = tech_key.rstrip()
                     image = DEFAULT_IMG_URL
 
                     # workaround: techgallery image has no pattern for url name

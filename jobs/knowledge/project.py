@@ -112,6 +112,7 @@ class Project(object):
                     image = DEFAULT_IMG_URL
 
                     # workaround: techgallery image has no pattern for url name
+                    logger.info('tech %s' % tech_key)
                     (tc_tech, status_code) = self.tc.technology(tech_key)
                     if 'image' in tc_tech:
                         logger.debug(tc_tech['image'])

@@ -47,7 +47,7 @@ class Stack(object):
 
         # add technologies list
         try:
-            echs = self.project.get_technology_list(key)
+            techs = self.project.get_technology_list(key)
             project['stack_size'] = len(techs) if techs else 0
             project['stack'] = techs
             # add team members

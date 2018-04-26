@@ -46,17 +46,21 @@ class Stack(object):
                 logger.info('stack %s not exits' % key)
 
         # add technologies list
-        techs = self.project.get_technology_list(key)
-        project['stack_size'] = len(techs) if techs else 0
-        project['stack'] = techs
-        # add team members
-        team = self.project.get_team(key)
-        project['team_size'] = len(team) if team else 0
-        project['team'] = team
-        # save document
-        self.save_document(project, key)
+        try:
+            echs = self.project.get_technology_list(key)
+            project['stack_size'] = len(techs) if techs else 0
+            project['stack'] = techs
+            # add team members
+            team = self.project.get_team(key)
+            project['team_size'] = len(team) if team else 0
+            project['team'] = team
+            # save document
+            self.save_document(project, key)
+            return project
+        except Exception as e:
+            logger.error(e)
+            return None
 
-        return project
 
     def create_template_if_notexits(self):
         """Create template if not exists."""

@@ -4,7 +4,7 @@ from flask import request
 from flask_restplus import Namespace, Resource, fields
 from repository import Repository
 from utils import security
-
+import elasticsearch
 
 api = Namespace('stacks', description='Stack operations')
 # api.add_resource(PeopleList, '/hello')
@@ -58,7 +58,6 @@ repository = Repository(app.config)
 
 index='stack'
 doc_type='setting',
-
 
 @api.route('/_search')
 @api.response(401, 'Authorization header not defined')
@@ -116,6 +115,45 @@ class StackList(Resource):
         }
         return repository.search_data_by_query(index=index, doc_type=doc_type, query=query)
 
+@api.route('/<id>')
+@api.response(404, 'Stack not found')
+@api.param('id', 'The stack identifier')
+class Stack(Resource):
+    """Show a single stack item and lets you delete them"""
+    @api.doc('get_stack')
+    @security.login_authorized
+    @api.marshal_with(stack)
+    def get(self, user, id):
+        """Fetch a given resource."""
+        stack = repository.get_document(index=index, doc_type=doc_type, id=id)
+        return stack['_source']
+
+    @api.doc('delete_stack')
+    @security.login_authorized
+    @api.response(204, 'Stack deleted')
+    def delete(self, user, id):
+        """Delete a stack given its login identifier."""
+        query = "sheet_id %s" % id
+        print "FIND BY ID"
+        try:
+            stack = repository.get_document(index=index, doc_type=doc_type, id=id)
+            print stack
+            repository.delete_by_id(index=index, doc_type=doc_type, id=id)
+            repository.delete_by_query(index="knowledge", search=query)
+            repository.delete_by_query(index="project", search=query)
+
+            return '', 204
+        except elasticsearch.NotFoundError as e:
+            return '', 404
+
+    @api.expect(stack)
+    @security.login_authorized
+    @api.marshal_with(stack)
+    def put(self, user, id):
+        """Update a task given its identifier."""
+        print request.json
+        repository.insert(index=index, doc_type=doc_type, id=id, document=request.json)
+        return request.json
 
 @api.route('/team/<key>')
 class StackTeam(Resource):
